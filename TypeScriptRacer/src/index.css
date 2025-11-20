@@ -1,54 +1,95 @@
 @import 'tailwindcss';
 
-/* CSS Variables for Light/Dark Theme */
+/* CSS Variables for Light/Dark Theme - Neo-Brutalism with OKLCH */
 :root {
-  /* Light Theme Colors - VS Code Light+ inspired */
-  --color-background: #ffffff;
-  --color-background-elevated: #f3f3f3;
-  --color-background-input: #f8f8f8;
+  /* Light Theme Colors - OKLCH */
+  --bg-dark: oklch(0.85 0.095 264);
+  --bg: oklch(0.93 0.095 264);
+  --bg-light: oklch(0.98 0.095 264);
+  --text: oklch(0.15 0.19 264);
+  --text-muted: oklch(0.4 0.19 264);
+  --highlight: oklch(1 0.19 264);
+  --border: oklch(0.6 0.19 264);
+  --border-muted: oklch(0.7 0.19 264);
+  --primary: oklch(0.4 0.19 264);
+  --secondary: oklch(0.4 0.19 84);
+  --danger: oklch(0.5 0.19 30);
+  --warning: oklch(0.5 0.19 100);
+  --success: oklch(0.5 0.19 160);
+  --info: oklch(0.5 0.19 260);
   
-  --color-text-primary: #1e1e1e;
-  --color-text-secondary: #6a737d;
-  --color-text-muted: #959da5;
+  /* Mapped to existing variables for compatibility */
+  --color-background: var(--bg-dark);
+  --color-background-elevated: var(--bg);
+  --color-background-input: var(--bg-light);
   
-  --color-primary: #0066cc;
-  --color-primary-hover: #005bb5;
+  --color-text-primary: var(--text);
+  --color-text-secondary: oklch(0.25 0.19 264);
+  --color-text-muted: var(--text-muted);
   
-  --color-accent-success: #22863a;
-  --color-accent-error: #d73a49;
-  --color-accent-warning: #f9c513;
+  --color-primary: var(--primary);
+  --color-primary-hover: oklch(0.35 0.19 264);
+  
+  --color-accent-success: var(--success);
+  --color-accent-error: var(--danger);
+  --color-accent-warning: var(--warning);
   
   /* Syntax Highlighting - Light Theme */
-  --color-syntax-keyword: #0000ff;
-  --color-syntax-string: #a31515;
-  --color-syntax-function: #795e26;
-  --color-syntax-comment: #008000;
-  --color-syntax-number: #098658;
+  --color-syntax-keyword: var(--primary);
+  --color-syntax-string: var(--success);
+  --color-syntax-function: var(--info);
+  --color-syntax-comment: var(--text-muted);
+  --color-syntax-number: var(--warning);
+  
+  /* Neo-Brutalism specific */
+  --border-thickness: 3px;
+  --shadow-offset: 4px;
 }
 
-/* Dark Theme - VS Code Dark+ inspired */
+/* Dark Theme - Neo-Brutalism with OKLCH (inverted) */
 .dark {
-  --color-background: #1e1e1e;
-  --color-background-elevated: #252526;
-  --color-background-input: #2d2d30;
+  /* Dark Theme Colors - Inverted for dark mode */
+  --bg-dark: oklch(0.12 0.095 264);
+  --bg: oklch(0.18 0.095 264);
+  --bg-light: oklch(0.24 0.095 264);
+  --text: oklch(0.95 0.19 264);
+  --text-muted: oklch(0.70 0.19 264);
+  --highlight: oklch(0.5 0.19 264);
+  --border: oklch(0.4 0.19 264);
+  --border-muted: oklch(0.3 0.19 264);
+  --primary: oklch(0.7 0.19 264);
+  --secondary: oklch(0.7 0.19 84);
+  --danger: oklch(0.6 0.19 30);
+  --warning: oklch(0.6 0.19 100);
+  --success: oklch(0.6 0.19 160);
+  --info: oklch(0.6 0.19 260);
   
-  --color-text-primary: #d4d4d4;
-  --color-text-secondary: #9da5b4;
-  --color-text-muted: #6a737d;
+  /* Mapped to existing variables for compatibility */
+  --color-background: var(--bg-dark);
+  --color-background-elevated: var(--bg);
+  --color-background-input: var(--bg-light);
   
-  --color-primary: #569cd6;
-  --color-primary-hover: #4e8cc4;
+  --color-text-primary: var(--text);
+  --color-text-secondary: oklch(0.85 0.19 264);
+  --color-text-muted: var(--text-muted);
   
-  --color-accent-success: #4ec9b0;
-  --color-accent-error: #f48771;
-  --color-accent-warning: #dcdcaa;
+  --color-primary: var(--primary);
+  --color-primary-hover: oklch(0.75 0.19 264);
+  
+  --color-accent-success: var(--success);
+  --color-accent-error: var(--danger);
+  --color-accent-warning: var(--warning);
   
   /* Syntax Highlighting - Dark Theme */
-  --color-syntax-keyword: #569cd6;
-  --color-syntax-string: #ce9178;
-  --color-syntax-function: #dcdcaa;
-  --color-syntax-comment: #6a9955;
-  --color-syntax-number: #b5cea8;
+  --color-syntax-keyword: var(--primary);
+  --color-syntax-string: var(--success);
+  --color-syntax-function: var(--info);
+  --color-syntax-comment: var(--text-muted);
+  --color-syntax-number: var(--warning);
+  
+  /* Neo-Brutalism specific */
+  --border-thickness: 3px;
+  --shadow-offset: 4px;
 }
 
 /* Base Styles */
@@ -58,18 +99,35 @@
   box-sizing: border-box;
 }
 
+* {
+  font-family: 'VT323', monospace !important;
+}
+
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  font-family: 'VT323', monospace !important;
   background-color: var(--color-background);
   color: var(--color-text-primary);
   transition: background-color 0.2s ease, color 0.2s ease;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: none;
+  -moz-osx-font-smoothing: unset;
+  font-size: 20px;
+  letter-spacing: 0.5px;
+  font-weight: 400;
+}
+
+/* Override bold to use normal weight for VT323 */
+b, strong, .font-bold {
+  font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'VT323', monospace !important;
 }
 
 code, pre {
-  font-family: 'Fira Code', 'JetBrains Mono', 'Consolas', 'Monaco', monospace;
-  font-variant-ligatures: common-ligatures;
+  font-family: 'VT323', monospace;
+  font-size: 20px;
+  letter-spacing: 0.5px;
 }
 
 /* Custom Scrollbar */
