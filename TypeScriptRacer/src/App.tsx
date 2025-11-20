@@ -1,18 +1,10 @@
 import './App.css'
-import { ThemeToggle } from './Components/ThemeToggle'
+import { Header } from './Components/Header'
 
 function App() {
   return (
       <div style={{backgroundColor: 'var(--bg-dark)'}} className="min-h-screen transition-colors duration-200">
-      {/* Header */}
-      <header style={{backgroundColor: 'var(--bg)'}} className="border-b-brutal border-text-primary px-6 py-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
-          <h1 className="text-3xl text-text-primary">
-            TypeScriptRacer
-          </h1>
-          <ThemeToggle />
-        </div>
-      </header>
+      <Header />
 
       {/* Main Content - Demo */}
       <main className="max-w-7xl mx-auto px-6 py-12">
