@@ -2,18 +2,26 @@ import { ThemeToggle } from './ThemeToggle'
 import { useState, useEffect } from 'react'
 import './Header.css'
 
+// Array of possible typos
+const typos = [
+  { text: 'Type<Scropt>Racer', position: 14, correctPos: 7 }, // "Scropt"
+  { text: 'Type<Sceript>Racer', position: 15, correctPos: 7 }, // "Sceript"
+  { text: 'Type<Scriptt>Racer', position: 15, correctPos: 7 }, // "Scriptt"
+  { text: 'Type<Skript>Racer', position: 14, correctPos: 6 }, // "Skript" - backtrack to "Type<S"
+  { text: 'Type<Scrupt>Racer', position: 14, correctPos: 7 }, // "Scrupt"
+]
+
 export function Header() {
   const fullText = 'Type<Script>Racer'
-  const typoText = 'Type<Scropt>Racer' // Typo: "Scropt" instead of "Script"
-  const typoPosition = 14 // Position where we stop typing after typo: "Type<Scropt>Ra"
-  const correctPosition = 7 // Position to backtrack to: "Type<Sc"
   
+  const [currentTypo, setCurrentTypo] = useState(() => typos[Math.floor(Math.random() * typos.length)])
   const [displayText, setDisplayText] = useState('')
   const [isTyping, setIsTyping] = useState(true)
   const [isPaused, setIsPaused] = useState(false)
   const [isPausedAfterErase, setIsPausedAfterErase] = useState(false)
   const [isFixingTypo, setIsFixingTypo] = useState(false)
   const [isPausedAfterTypo, setIsPausedAfterTypo] = useState(false)
+  const [isPausedAfterFixing, setIsPausedAfterFixing] = useState(false)
   const [isTypingCorrection, setIsTypingCorrection] = useState(false)
 
   useEffect(() => {
@@ -30,23 +38,31 @@ export function Header() {
       timeout = setTimeout(() => {
         setIsPausedAfterErase(false)
         setIsTyping(true)
+        // Select a new random typo for the next loop
+        setCurrentTypo(typos[Math.floor(Math.random() * typos.length)])
       }, 2000)
     } else if (isPausedAfterTypo) {
       // Pause briefly after making typo before fixing it
       timeout = setTimeout(() => {
         setIsPausedAfterTypo(false)
         setIsFixingTypo(true)
-      }, 500)
+      }, 1000)
     } else if (isFixingTypo) {
       // Erase back to correct position
-      if (displayText.length > correctPosition) {
+      if (displayText.length > currentTypo.correctPos) {
         timeout = setTimeout(() => {
           setDisplayText(displayText.slice(0, -1))
         }, 80) // Faster erase for fixing typo
       } else {
         setIsFixingTypo(false)
-        setIsTypingCorrection(true)
+        setIsPausedAfterFixing(true)
       }
+    } else if (isPausedAfterFixing) {
+      // Pause briefly after erasing typo before typing correction
+      timeout = setTimeout(() => {
+        setIsPausedAfterFixing(false)
+        setIsTypingCorrection(true)
+      }, 500)
     } else if (isTypingCorrection) {
       // Type the correct version
       if (displayText.length < fullText.length) {
@@ -59,9 +75,9 @@ export function Header() {
       }
     } else if (isTyping) {
       // Initial typing animation with typo
-      if (displayText.length < typoPosition) {
+      if (displayText.length < currentTypo.position) {
         timeout = setTimeout(() => {
-          setDisplayText(typoText.slice(0, displayText.length + 1))
+          setDisplayText(currentTypo.text.slice(0, displayText.length + 1))
         }, 150) // Type speed
       } else {
         setIsTyping(false)
@@ -79,20 +95,23 @@ export function Header() {
     }
 
     return () => clearTimeout(timeout)
-  }, [displayText, isTyping, isPaused, isPausedAfterErase, isFixingTypo, isPausedAfterTypo, isTypingCorrection, fullText, typoText, typoPosition, correctPosition])
+  }, [displayText, isTyping, isPaused, isPausedAfterErase, isFixingTypo, isPausedAfterTypo, isPausedAfterFixing, isTypingCorrection, fullText, currentTypo])
 
   // Parse the display text to identify the <Script> part and show typo underline
   const renderText = () => {
     // Check if we're in the typo state (after typing typo but before fixing)
-    const hasTypo = displayText.includes('<Scropt') && (isPausedAfterTypo || isFixingTypo)
+    // Extract the typo word from currentTypo.text (e.g., "Scropt" from "Type<Scropt>Racer")
+    const typoMatch = currentTypo.text.match(/<([^>]+)>/)
+    const typoWord = typoMatch ? typoMatch[1] : ''
+    const hasTypo = displayText.includes(`<${typoWord}`) && (isPausedAfterTypo || isFixingTypo)
     
     const scriptStart = displayText.indexOf('<Script>')
-    const typoStart = displayText.indexOf('<Scropt')
+    const typoStart = displayText.indexOf(`<${typoWord}`)
     
     if (hasTypo && typoStart !== -1) {
       // Show typo with red underline
       const beforeTypo = displayText.slice(0, typoStart)
-      const typoLength = Math.min(displayText.length - typoStart, 7) // '<Scropt'.length = 7
+      const typoLength = Math.min(displayText.length - typoStart, typoWord.length + 2) // '<typoWord>'.length
       const typoPart = displayText.slice(typoStart, typoStart + typoLength)
       const afterTypo = displayText.slice(typoStart + typoLength)
       
@@ -128,7 +147,7 @@ export function Header() {
   return (
     <header style={{backgroundColor: 'var(--bg)'}} className="border-b-brutal border-text-primary px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-center relative">
-        <h1 className="text-3xl text-text-primary flex items-center">
+        <h1 className="text-3xl text-text-primary flex items-center" style={{ minHeight: '48px' }}>
           {renderText()}
           <span 
             className="inline-block ml-1 animate-blink"
