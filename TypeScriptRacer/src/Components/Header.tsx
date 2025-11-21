@@ -1,4 +1,5 @@
 import { ThemeToggle } from './ThemeToggle'
+import { AboutModal } from './AboutModal'
 import { useState, useEffect } from 'react'
 import './Header.css'
 
@@ -23,6 +24,7 @@ export function Header() {
   const [isPausedAfterTypo, setIsPausedAfterTypo] = useState(false)
   const [isPausedAfterFixing, setIsPausedAfterFixing] = useState(false)
   const [isTypingCorrection, setIsTypingCorrection] = useState(false)
+  const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
 
   useEffect(() => {
     let timeout: number
@@ -145,16 +147,28 @@ export function Header() {
   }
 
   return (
-    <header className="header-container">
-      <div className="header-content">
-        <h1 className="header-title">
-          {renderText()}
-          <span className="animate-blink"></span>
-        </h1>
-        <div className="header-theme-toggle">
-          <ThemeToggle />
+    <>
+      <header className="header-container">
+        <div className="header-content">
+          <button 
+            className="header-about-button"
+            onClick={() => setIsAboutModalOpen(true)}
+          >
+            About the Dev
+          </button>
+          <h1 className="header-title">
+            {renderText()}
+            <span className="animate-blink"></span>
+          </h1>
+          <div className="header-theme-toggle">
+            <ThemeToggle />
+          </div>
         </div>
-      </div>
-    </header>
+      </header>
+      <AboutModal 
+        isOpen={isAboutModalOpen} 
+        onClose={() => setIsAboutModalOpen(false)} 
+      />
+    </>
   )
 }

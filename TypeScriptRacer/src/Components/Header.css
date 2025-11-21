@@ -22,6 +22,34 @@
   min-height: 48px;
 }
 
+.header-about-button {
+  position: absolute;
+  left: 0;
+  padding: 0.5rem 1rem;
+  background-color: var(--bg);
+  border: var(--border-thickness) solid var(--color-text-primary);
+  color: var(--color-text-primary);
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  box-shadow: 4px 4px 0px 0px var(--color-text-primary);
+}
+
+.header-about-button:hover {
+  background-color: var(--color-primary);
+  color: var(--bg);
+  border-color: var(--color-primary);
+  box-shadow: 4px 4px 0px 0px var(--color-primary);
+  transform: translate(-2px, -2px);
+}
+
+.header-about-button:active {
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0px 0px var(--color-text-primary);
+}
+
 .header-theme-toggle {
   position: absolute;
   right: 0;
