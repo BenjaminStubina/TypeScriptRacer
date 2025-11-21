@@ -1,12 +1,19 @@
 import './App.css'
+import { useState } from 'react'
 import { Header } from './Components/Header'
 import { ViewportGuard } from './Components/ViewportGuard'
+import { BootSequence } from './Components/BootSequence'
 
 function App() {
+  const [bootComplete, setBootComplete] = useState(false)
+
   return (
       <div className="app-container">
-      <ViewportGuard />
-      <Header />
+      <BootSequence onComplete={() => setBootComplete(true)} />
+      {bootComplete && (
+        <div className="app-content">
+          <ViewportGuard />
+          <Header />
 
       {/* Main Content - Demo */}
       <main className="main-content">
@@ -209,6 +216,8 @@ function App() {
           </div>
         </div>
       </main>
+        </div>
+      )}
     </div>
   )
 }

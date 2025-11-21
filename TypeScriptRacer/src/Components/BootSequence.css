@@ -1,0 +1,66 @@
+/* Boot Sequence Overlay */
+.boot-sequence-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #000000;
+  z-index: 99999;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 2rem;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.boot-sequence-overlay.fade-out {
+  animation: fadeOut 0.8s ease forwards;
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.boot-sequence-content {
+  font-family: 'VT323', monospace;
+  font-size: 1.25rem;
+  color: #33ff33;
+  text-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
+  line-height: 1.4;
+  width: 100%;
+}
+
+.boot-line {
+  white-space: pre;
+  margin-bottom: 0.2rem;
+}
+
+.boot-cursor {
+  display: inline-block;
+  animation: blink-boot 1s step-end infinite;
+  margin-left: 0.25rem;
+}
+
+@keyframes blink-boot {
+  0%, 49% {
+    opacity: 1;
+  }
+  50%, 100% {
+    opacity: 0;
+  }
+}
