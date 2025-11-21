@@ -118,7 +118,7 @@ export function Header() {
       return (
         <>
           {beforeTypo}
-          <span className="text-primary font-bold" style={{ textDecoration: 'underline wavy', textDecorationColor: 'red', textDecorationThickness: '2px', textDecorationSkipInk: 'none' }}>
+          <span className="title-primary-text" style={{ textDecoration: 'underline wavy', textDecorationColor: 'red', textDecorationThickness: '2px', textDecorationSkipInk: 'none' }}>
             {typoPart}
           </span>
           {afterTypo}
@@ -138,27 +138,20 @@ export function Header() {
     return (
       <>
         {beforeScript}
-        <span className="text-primary font-bold">{scriptPart}</span>
+        <span className="title-primary-text">{scriptPart}</span>
         {afterScript}
       </>
     )
   }
 
   return (
-    <header style={{backgroundColor: 'var(--bg)'}} className="border-b-brutal border-text-primary px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-center relative">
-        <h1 className="text-3xl text-text-primary flex items-center" style={{ minHeight: '48px' }}>
+    <header className="header-container">
+      <div className="header-content">
+        <h1 className="header-title">
           {renderText()}
-          <span 
-            className="inline-block ml-1 animate-blink"
-            style={{
-              width: '12px',
-              height: '32px',
-              backgroundColor: 'var(--color-text-primary)'
-            }}
-          ></span>
+          <span className="animate-blink"></span>
         </h1>
-        <div className="absolute right-0">
+        <div className="header-theme-toggle">
           <ThemeToggle />
         </div>
       </div>

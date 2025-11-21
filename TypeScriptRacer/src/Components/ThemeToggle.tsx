@@ -1,4 +1,5 @@
 import { useTheme } from '../context/ThemeContext';
+import './ThemeToggle.css';
 
 export function ThemeToggle() {
   const { theme, toggleTheme } = useTheme();
@@ -6,14 +7,14 @@ export function ThemeToggle() {
   return (
     <button
       onClick={toggleTheme}
-      className="p-3 bg-background-elevated border-brutal border-text-primary shadow-brutal hover:translate-x-1 hover:translate-y-1 hover:shadow-none transition-all active:translate-x-1 active:translate-y-1 active:shadow-none"
+      className="theme-toggle-button"
       aria-label="Toggle theme"
       title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
     >
       {theme === 'dark' ? (
         // Sun icon for light mode
         <svg
-          className="w-5 h-5 text-text-primary"
+          className="theme-toggle-icon"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"
@@ -29,7 +30,7 @@ export function ThemeToggle() {
       ) : (
         // Moon icon for dark mode
         <svg
-          className="w-5 h-5 text-text-primary"
+          className="theme-toggle-icon"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 24 24"

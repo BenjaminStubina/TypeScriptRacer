@@ -1,3 +1,36 @@
+/* Header Styles */
+.header-container {
+  background-color: var(--bg);
+  border-bottom: var(--border-thickness) solid var(--color-text-primary);
+  padding: 1rem 1.5rem;
+}
+
+.header-content {
+  max-width: 1280px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.header-title {
+  font-size: 3rem;
+  color: var(--color-text-primary);
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+}
+
+.header-theme-toggle {
+  position: absolute;
+  right: 0;
+}
+
+.title-primary-text {
+  color: var(--color-primary);
+}
+
 /* Blinking Cursor Animation */
 @keyframes blink {
   0%, 49% {
@@ -10,4 +43,9 @@
 
 .animate-blink {
   animation: blink 1s step-end infinite;
+  display: inline-block;
+  margin-left: 0.25rem;
+  width: 16px;
+  height: 42px;
+  background-color: var(--color-text-primary);
 }
