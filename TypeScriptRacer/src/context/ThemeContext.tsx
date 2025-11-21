@@ -1,4 +1,4 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from 'react';
+import { createContext, useContext, useEffect, useState, type ReactNode } from 'react';
 
 type Theme = 'light' | 'dark';
 
@@ -15,7 +15,7 @@ interface ThemeProviderProps {
   defaultTheme?: Theme;
 }
 
-export function ThemeProvider({ children, defaultTheme = 'dark' }: ThemeProviderProps) {
+export function ThemeProvider({ children, defaultTheme = 'light' }: ThemeProviderProps) {
   const [theme, setThemeState] = useState<Theme>(() => {
     // Check localStorage first, then system preference, then default
     const savedTheme = localStorage.getItem('theme') as Theme | null;
