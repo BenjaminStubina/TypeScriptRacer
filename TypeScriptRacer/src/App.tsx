@@ -1,9 +1,11 @@
 import './App.css'
 import { Header } from './Components/Header'
+import { ViewportGuard } from './Components/ViewportGuard'
 
 function App() {
   return (
       <div className="app-container">
+      <ViewportGuard />
       <Header />
 
       {/* Main Content - Demo */}
