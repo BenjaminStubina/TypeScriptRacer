@@ -5,6 +5,22 @@
   transition: background-color 0.2s, color 0.2s;
 }
 
+.app-content {
+  animation: siteLoadIn 1s ease forwards;
+  opacity: 0;
+}
+
+@keyframes siteLoadIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .main-content {
   max-width: 1280px;
   margin: 0 auto;
@@ -26,29 +42,50 @@
 }
 
 .title-section h2 {
-  font-size: 2.25rem;
+  font-size: 2.75rem;
   color: var(--color-text-primary);
 }
 
+.title-section h2::before {
+  content: '$ ';
+  color: var(--color-primary);
+  opacity: 0.8;
+  margin-right: 0.25rem;
+}
+
 .title-section p {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   color: var(--color-text-secondary);
   max-width: 42rem;
   margin: 0 auto;
 }
 
-/* Card Styles */
+/* Card Styles - DOS-style Terminal Windows */
 .card {
-  background-color: var(--bg-light);
+  background-color: var(--bg);
   padding: 2rem;
-  border: var(--border-thickness) solid var(--color-text-primary);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px #000000;
+  border: 3px double var(--border);
+  box-shadow: 0 0 20px var(--glow-color), 
+              3px 3px 0 var(--border-muted);
+  position: relative;
+}
+
+.dark .card {
+  box-shadow: 0 0 20px var(--glow-color), 
+              3px 3px 0 var(--border-muted),
+              inset 0 0 20px rgba(0, 0, 0, 0.5);
 }
 
 .card-title {
-  font-size: 1.25rem;
+  font-size: 1.75rem;
   color: var(--color-text-primary);
   margin-bottom: 1.5rem;
+}
+
+.card-title::before {
+  content: '$ ';
+  color: var(--color-primary);
+  opacity: 0.8;
 }
 
 /* Grid Layouts */
@@ -70,11 +107,18 @@
   }
 }
 
-/* Color Cards */
+/* Color Cards - DOS-style boxes */
 .color-card {
   padding: 1.5rem;
-  border: var(--border-thickness) solid var(--color-text-primary);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px #000000;
+  border: 2px double var(--border);
+  box-shadow: 0 0 10px var(--glow-color),
+              2px 2px 0 var(--border-muted);
+  position: relative;
+}
+
+.dark .color-card {
+  box-shadow: 0 0 15px var(--glow-color),
+              2px 2px 0 var(--border-muted);
 }
 
 .color-card-content {
@@ -84,24 +128,25 @@
 }
 
 .color-card h4 {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
   text-transform: uppercase;
 }
 
 .color-swatch {
-  background-color: var(--bg);
-  border: 2px solid var(--color-text-primary);
+  background-color: var(--bg-dark);
+  border: 1px solid var(--border);
   padding: 0.75rem;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .color-swatch p {
-  font-size: 0.75rem;
+  font-size: 1rem;
   font-family: 'VT323', monospace;
   color: var(--color-text-primary);
 }
 
 .color-card p {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
 }
 
 /* Color Variants */
@@ -186,14 +231,19 @@
   font-size: 0.875rem;
 }
 
-/* Code Sample */
+/* Code Sample - Terminal Code Block */
 .code-sample {
-  background-color: var(--bg-light);
+  background-color: var(--bg-dark);
   padding: 1rem;
-  border: var(--border-thickness) solid var(--color-text-primary);
-  box-shadow: 2px 2px 0px 0px #000000;
+  border: var(--border-thickness) solid var(--border);
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
   font-family: 'VT323', monospace;
-  font-size: 0.875rem;
+  font-size: 1.125rem;
+  position: relative;
+}
+
+.dark .code-sample {
+  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px var(--glow-color);
 }
 
 .code-lines {
@@ -226,7 +276,7 @@
   color: var(--color-text-primary);
 }
 
-/* Buttons */
+/* Buttons - Retro Terminal Style */
 .button-group {
   display: flex;
   flex-wrap: wrap;
@@ -236,31 +286,59 @@
 
 .btn {
   padding: 0.75rem 1.5rem;
-  border: var(--border-thickness) solid var(--color-text-primary);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px #000000;
+  border: var(--border-thickness) solid var(--border);
+  box-shadow: 0 0 10px var(--glow-color);
   text-transform: uppercase;
   cursor: pointer;
   transition: all 0.15s ease;
+  position: relative;
+}
+
+.btn::before {
+  content: '> ';
+  margin-right: 0.5rem;
+  opacity: 0.7;
 }
 
 .btn:hover {
-  transform: translate(1px, 1px);
-  box-shadow: none;
+  box-shadow: 0 0 20px var(--glow-color);
+  filter: brightness(1.2);
+}
+
+.btn:hover::before {
+  opacity: 1;
+  animation: prompt-blink 0.5s ease infinite;
+}
+
+@keyframes prompt-blink {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
 }
 
 .btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: none;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  filter: brightness(0.9);
 }
 
 .btn-primary {
-  background-color: var(--color-primary);
-  color: white;
+  background-color: var(--bg-light);
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.dark .btn-primary {
+  background-color: var(--bg-dark);
+  box-shadow: 0 0 15px var(--glow-color);
 }
 
 .btn-secondary {
-  background-color: var(--bg-light);
+  background-color: var(--bg);
   color: var(--color-text-primary);
+  border-color: var(--border);
 }
 
 /* Typography Section */
@@ -277,11 +355,11 @@
 }
 
 .typography-item .demo-title {
-  font-size: 1.125rem;
+  font-size: 1.5rem;
 }
 
 .typography-item .demo-text {
-  font-size: 0.875rem;
+  font-size: 1.125rem;
 }
 
 .text-primary {

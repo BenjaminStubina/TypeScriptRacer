@@ -1,8 +1,16 @@
-/* Header Styles */
+/* Header Styles - Retro Terminal */
 .header-container {
-  background-color: var(--bg);
-  border-bottom: var(--border-thickness) solid var(--color-text-primary);
+  background-color: var(--bg-dark);
+  border-bottom: var(--border-thickness) solid var(--border);
   padding: 1rem 1.5rem;
+  box-shadow: 0 2px 20px var(--glow-color);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.dark .header-container {
+  box-shadow: 0 2px 30px var(--glow-color);
 }
 
 .header-content {
@@ -10,49 +18,91 @@
   margin: 0 auto;
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   position: relative;
 }
 
 .header-title {
-  font-size: 3rem;
+  font-size: 3.5rem;
   color: var(--color-text-primary);
   display: flex;
   align-items: center;
-  min-height: 48px;
+  justify-content: center;
+  min-height: 80px;
+  gap: 0.5rem;
+}
+
+.terminal-prompt {
+  color: var(--color-primary);
+  margin-right: 0.25rem;
+  opacity: 0.9;
+}
+
+.terminal-command {
+  color: var(--secondary);
+  margin-right: 0.5rem;
+  opacity: 0.85;
+}
+
+/* Responsive header sizing */
+@media (max-width: 768px) {
+  .header-title {
+    font-size: 2rem;
+    min-height: 50px;
+    gap: 0.25rem;
+  }
+  
+  .header-about-button {
+    font-size: 0.875rem;
+    padding: 0.4rem 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-title {
+    font-size: 1.5rem;
+    min-height: 40px;
+    gap: 0.25rem;
+  }
 }
 
 .header-about-button {
-  position: absolute;
-  left: 0;
   padding: 0.5rem 1rem;
   background-color: var(--bg);
-  border: var(--border-thickness) solid var(--color-text-primary);
+  border: var(--border-thickness) solid var(--border);
   color: var(--color-text-primary);
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 0.875rem;
+  font-size: 1.125rem;
   cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 4px 4px 0px 0px var(--color-text-primary);
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+.header-about-button::before {
+  content: '> ';
+  opacity: 0.7;
+  margin-right: 0.25rem;
 }
 
 .header-about-button:hover {
-  background-color: var(--color-primary);
-  color: var(--bg);
+  background-color: var(--bg-light);
+  color: var(--color-primary);
   border-color: var(--color-primary);
-  box-shadow: 4px 4px 0px 0px var(--color-primary);
-  transform: translate(-2px, -2px);
+  box-shadow: 0 0 20px var(--glow-color);
+  filter: brightness(1.2);
+}
+
+.header-about-button:hover::before {
+  opacity: 1;
 }
 
 .header-about-button:active {
-  transform: translate(2px, 2px);
-  box-shadow: 2px 2px 0px 0px var(--color-text-primary);
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  filter: brightness(0.9);
 }
 
 .header-theme-toggle {
-  position: absolute;
-  right: 0;
 }
 
 .title-primary-text {
@@ -72,8 +122,21 @@
 .animate-blink {
   animation: blink 1s step-end infinite;
   display: inline-block;
-  margin-left: 0.25rem;
-  width: 16px;
-  height: 42px;
+  width: 20px;
+  height: 1em;
   background-color: var(--color-text-primary);
+  vertical-align: text-bottom;
+}
+
+/* Responsive cursor sizing */
+@media (max-width: 768px) {
+  .animate-blink {
+    width: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .animate-blink {
+    width: 10px;
+  }
 }

@@ -1,20 +1,20 @@
-/* CSS Variables for Light/Dark Theme - Neo-Brutalism with OKLCH */
+/* CSS Variables for Retro IBM Terminal Theme */
 :root {
-  /* Light Theme Colors - OKLCH */
-  --bg-dark: oklch(0.85 0.095 264);
-  --bg: oklch(0.93 0.095 264);
-  --bg-light: oklch(0.98 0.095 264);
-  --text: oklch(0.15 0.19 264);
-  --text-muted: oklch(0.4 0.19 264);
-  --highlight: oklch(1 0.19 264);
-  --border: oklch(0.6 0.19 264);
-  --border-muted: oklch(0.7 0.19 264);
-  --primary: oklch(0.4 0.19 264);
-  --secondary: oklch(0.4 0.19 84);
-  --danger: oklch(0.5 0.19 30);
-  --warning: oklch(0.5 0.19 100);
-  --success: oklch(0.5 0.19 160);
-  --info: oklch(0.5 0.19 260);
+  /* Light Theme - Amber Paper Terminal (like old IBM DOS) */
+  --bg-dark: oklch(0.93 0.05 85);
+  --bg: oklch(0.96 0.04 85);
+  --bg-light: oklch(0.98 0.03 85);
+  --text: oklch(0.25 0.08 40);
+  --text-muted: oklch(0.50 0.06 40);
+  --highlight: oklch(0.65 0.18 60);
+  --border: oklch(0.35 0.08 40);
+  --border-muted: oklch(0.55 0.06 40);
+  --primary: oklch(0.55 0.20 50);
+  --secondary: oklch(0.45 0.16 160);
+  --danger: oklch(0.50 0.22 25);
+  --warning: oklch(0.65 0.18 70);
+  --success: oklch(0.55 0.18 150);
+  --info: oklch(0.55 0.16 240);
   
   /* Mapped to existing variables for compatibility */
   --color-background: var(--bg-dark);
@@ -22,45 +22,45 @@
   --color-background-input: var(--bg-light);
   
   --color-text-primary: var(--text);
-  --color-text-secondary: oklch(0.25 0.19 264);
+  --color-text-secondary: oklch(0.35 0.08 40);
   --color-text-muted: var(--text-muted);
   
   --color-primary: var(--primary);
-  --color-primary-hover: oklch(0.35 0.19 264);
+  --color-primary-hover: oklch(0.65 0.20 50);
   
   --color-accent-success: var(--success);
   --color-accent-error: var(--danger);
   --color-accent-warning: var(--warning);
   
   /* Syntax Highlighting - Light Theme */
-  --color-syntax-keyword: var(--primary);
+  --color-syntax-keyword: oklch(0.50 0.20 280);
   --color-syntax-string: var(--success);
-  --color-syntax-function: var(--info);
+  --color-syntax-function: oklch(0.45 0.18 240);
   --color-syntax-comment: var(--text-muted);
-  --color-syntax-number: var(--warning);
+  --color-syntax-number: oklch(0.55 0.18 50);
   
-  /* Neo-Brutalism specific */
-  --border-thickness: 3px;
-  --shadow-offset: 4px;
+  /* Retro Terminal specific */
+  --border-thickness: 2px;
+  --glow-color: rgba(204, 136, 0, 0.15);
 }
 
-/* Dark Theme - Neo-Brutalism with OKLCH (inverted) */
+/* Dark Theme - Classic Phosphor Green CRT Terminal */
 .dark {
-  /* Dark Theme Colors - Inverted for dark mode */
-  --bg-dark: oklch(0.12 0.095 264);
-  --bg: oklch(0.18 0.095 264);
-  --bg-light: oklch(0.24 0.095 264);
-  --text: oklch(0.95 0.19 264);
-  --text-muted: oklch(0.70 0.19 264);
-  --highlight: oklch(0.5 0.19 264);
-  --border: oklch(0.4 0.19 264);
-  --border-muted: oklch(0.3 0.19 264);
-  --primary: oklch(0.7 0.19 264);
-  --secondary: oklch(0.7 0.19 84);
-  --danger: oklch(0.6 0.19 30);
-  --warning: oklch(0.6 0.19 100);
-  --success: oklch(0.6 0.19 160);
-  --info: oklch(0.6 0.19 260);
+  /* Pure black background with vibrant green phosphor glow */
+  --bg-dark: oklch(0.08 0.02 150);
+  --bg: oklch(0.18 0.04 150);
+  --bg-light: oklch(0.24 0.05 150);
+  --text: oklch(0.88 0.24 145);
+  --text-muted: oklch(0.60 0.18 145);
+  --highlight: oklch(0.92 0.28 145);
+  --border: oklch(0.65 0.22 145);
+  --border-muted: oklch(0.45 0.16 145);
+  --primary: oklch(0.85 0.26 145);
+  --secondary: oklch(0.80 0.24 190);
+  --danger: oklch(0.65 0.25 25);
+  --warning: oklch(0.78 0.22 95);
+  --success: oklch(0.75 0.20 155);
+  --info: oklch(0.75 0.20 200);
   
   /* Mapped to existing variables for compatibility */
   --color-background: var(--bg-dark);
@@ -68,26 +68,26 @@
   --color-background-input: var(--bg-light);
   
   --color-text-primary: var(--text);
-  --color-text-secondary: oklch(0.85 0.19 264);
+  --color-text-secondary: oklch(0.78 0.22 145);
   --color-text-muted: var(--text-muted);
   
   --color-primary: var(--primary);
-  --color-primary-hover: oklch(0.75 0.19 264);
+  --color-primary-hover: oklch(0.92 0.28 145);
   
   --color-accent-success: var(--success);
   --color-accent-error: var(--danger);
   --color-accent-warning: var(--warning);
   
   /* Syntax Highlighting - Dark Theme */
-  --color-syntax-keyword: var(--primary);
-  --color-syntax-string: var(--success);
-  --color-syntax-function: var(--info);
+  --color-syntax-keyword: oklch(0.82 0.24 190);
+  --color-syntax-string: oklch(0.78 0.22 95);
+  --color-syntax-function: oklch(0.75 0.20 200);
   --color-syntax-comment: var(--text-muted);
-  --color-syntax-number: var(--warning);
+  --color-syntax-number: oklch(0.75 0.20 155);
   
-  /* Neo-Brutalism specific */
-  --border-thickness: 3px;
-  --shadow-offset: 4px;
+  /* Retro Terminal specific - Bright green glow */
+  --border-thickness: 2px;
+  --glow-color: rgba(51, 255, 102, 0.5);
 }
 
 /* Base Styles */
@@ -108,9 +108,134 @@ body {
   transition: background-color 0.2s ease, color 0.2s ease;
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: unset;
-  font-size: 20px;
+  font-size: 24px;
   letter-spacing: 0.5px;
   font-weight: 400;
+  position: relative;
+}
+
+/* CRT Scanline Effect */
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(0, 0, 0, 0.15),
+    rgba(0, 0, 0, 0.15) 1px,
+    transparent 1px,
+    transparent 2.5px
+  );
+  pointer-events: none;
+  z-index: 9999;
+}
+
+/* CRT Screen Curvature & Glow */
+.dark body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
+  pointer-events: none;
+  z-index: 9998;
+}
+
+/* VHS Tracking Noise */
+body {
+  animation: vhs-tracking 0.1s infinite;
+}
+
+@keyframes vhs-tracking {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 0 100%;
+  }
+}
+
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    0deg,
+    transparent 0px,
+    transparent 2px,
+    rgba(255, 255, 255, 0.03) 2px,
+    rgba(255, 255, 255, 0.03) 3px,
+    transparent 3px,
+    transparent 100px
+  );
+  pointer-events: none;
+  z-index: 9997;
+  animation: vhs-glitch 4s infinite;
+  opacity: 0;
+}
+
+@keyframes vhs-glitch {
+  0%, 95% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+  96% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  97% {
+    opacity: 0.8;
+    transform: translateY(-5px);
+  }
+  98% {
+    opacity: 0.6;
+    transform: translateY(3px);
+  }
+  99%, 100% {
+    opacity: 0;
+    transform: translateY(0);
+  }
+}
+
+/* Text glow effect for dark mode */
+.dark {
+  text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
+  animation: crt-flicker 0.15s infinite;
+}
+
+/* Subtle CRT Flicker */
+@keyframes crt-flicker {
+  0% {
+    opacity: 0.98;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0.98;
+  }
+}
+
+/* Occasional brightness pulse */
+.dark .app-container {
+  animation: brightness-pulse 3s ease-in-out infinite;
+}
+
+@keyframes brightness-pulse {
+  0%, 100% {
+    filter: brightness(1);
+  }
+  50% {
+    filter: brightness(1.02);
+  }
 }
 
 /* Override bold to use normal weight for VT323 */
@@ -124,37 +249,44 @@ h1, h2, h3, h4, h5, h6 {
 
 code, pre {
   font-family: 'VT323', monospace;
-  font-size: 20px;
+  font-size: 24px;
   letter-spacing: 0.5px;
 }
 
-/* Custom Scrollbar */
+/* Custom Scrollbar - Retro Style */
 ::-webkit-scrollbar {
-  width: 12px;
-  height: 12px;
+  width: 16px;
+  height: 16px;
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--color-background);
+  background: var(--bg-dark);
+  border: 1px solid var(--border);
 }
 
 ::-webkit-scrollbar-thumb {
   background: var(--color-text-muted);
-  border-radius: 6px;
+  border: 1px solid var(--border);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-text-secondary);
+  background: var(--color-primary);
+}
+
+::-webkit-scrollbar-corner {
+  background: var(--bg-dark);
 }
 
 /* Selection Color */
 ::selection {
   background-color: var(--color-primary);
   color: var(--color-background);
+  text-shadow: none;
 }
 
-/* Focus Styles */
+/* Focus Styles - Retro */
 :focus-visible {
   outline: 2px solid var(--color-primary);
-  outline-offset: 2px;
+  outline-offset: 0px;
+  box-shadow: 0 0 10px var(--glow-color);
 }

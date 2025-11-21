@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import './AboutModal.css';
 
 interface AboutModalProps {
@@ -16,10 +17,14 @@ export const AboutModal = ({ isOpen, onClose }: AboutModalProps) => {
         };
 
         if (isOpen) {
+            // Disable body scroll when modal is open
+            document.body.style.overflow = 'hidden';
             document.addEventListener('keydown', handleEscape);
         }
 
         return () => {
+            // Re-enable body scroll when modal closes
+            document.body.style.overflow = 'unset';
             document.removeEventListener('keydown', handleEscape);
         };
     }, [isOpen, onClose]);
@@ -33,7 +38,7 @@ export const AboutModal = ({ isOpen, onClose }: AboutModalProps) => {
         }
     };
 
-    return (
+    return createPortal(
         <div className="about-modal-overlay" onClick={handleOverlayClick}>
             <div className="about-modal-content">
                 <button className="about-modal-close" onClick={onClose}>
@@ -57,6 +62,7 @@ export const AboutModal = ({ isOpen, onClose }: AboutModalProps) => {
                     </div>
                 </div>
             </div>
-        </div>
+        </div>,
+        document.body
     );
 };

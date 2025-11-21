@@ -5,11 +5,11 @@ import './Header.css'
 
 // Array of possible typos
 const typos = [
-  { text: 'Type<Scropt>Racer', position: 14, correctPos: 7 }, // "Scropt"
-  { text: 'Type<Sceript>Racer', position: 15, correctPos: 7 }, // "Sceript"
-  { text: 'Type<Scriptt>Racer', position: 15, correctPos: 7 }, // "Scriptt"
-  { text: 'Type<Skript>Racer', position: 14, correctPos: 6 }, // "Skript" - backtrack to "Type<S"
-  { text: 'Type<Scrupt>Racer', position: 14, correctPos: 7 }, // "Scrupt"
+  { text: 'Type<Scropt>Racer', position: 14, correctPos: 5 }, // "Scropt" - backtrack to "Type<"
+  { text: 'Type<Sceript>Racer', position: 15, correctPos: 5 }, // "Sceript" - backtrack to "Type<"
+  { text: 'Type<Scriptt>Racer', position: 15, correctPos: 5 }, // "Scriptt" - backtrack to "Type<"
+  { text: 'Type<Skript>Racer', position: 14, correctPos: 5 }, // "Skript" - backtrack to "Type<"
+  { text: 'Type<Scrupt>Racer', position: 14, correctPos: 5 }, // "Scrupt" - backtrack to "Type<"
 ]
 
 export function Header() {
@@ -120,7 +120,7 @@ export function Header() {
       return (
         <>
           {beforeTypo}
-          <span className="title-primary-text" style={{ textDecoration: 'underline wavy', textDecorationColor: 'red', textDecorationThickness: '2px', textDecorationSkipInk: 'none' }}>
+          <span className="title-primary-text" style={{ textDecoration: 'underline wavy', textDecorationColor: 'red', textDecorationThickness: '2px', textDecorationSkipInk: 'none', textUnderlineOffset: '6px' }}>
             {typoPart}
           </span>
           {afterTypo}
@@ -157,6 +157,8 @@ export function Header() {
             About the Dev
           </button>
           <h1 className="header-title">
+            <span className="terminal-prompt">$</span>
+            <span className="terminal-command">run</span>
             {renderText()}
             <span className="animate-blink"></span>
           </h1>

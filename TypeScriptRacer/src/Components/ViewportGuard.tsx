@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { createPortal } from 'react-dom';
 import './ViewportGuard.css';
 
 export const ViewportGuard = () => {
@@ -23,7 +24,7 @@ export const ViewportGuard = () => {
 
   if (!isSmallViewport) return null;
 
-  return (
+  return createPortal(
     <div className="viewport-guard-overlay">
       <div className="viewport-guard-content">
         <h2>Screen Too Small</h2>
@@ -31,6 +32,7 @@ export const ViewportGuard = () => {
           TypeScriptRacer is designed for desktop use. Please increase your browser window size or switch to a larger device to enjoy the full experience.
         </p>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 };
