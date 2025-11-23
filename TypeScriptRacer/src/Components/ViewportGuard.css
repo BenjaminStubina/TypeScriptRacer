@@ -1,37 +1,40 @@
-/* Viewport Guard Overlay */
+/* ============================================================================
+   VIEWPORT GUARD - Screen Size Warning
+   ============================================================================ */
 .viewport-guard-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.85);
-  backdrop-filter: blur(4px);
+  background-color: var(--component-modal-backdrop);
+  backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
-  padding: 1.5rem;
+  z-index: var(--component-z-modal);
+  padding: var(--token-space-lg);
 }
 
 .viewport-guard-content {
-  max-width: 500px;
+  max-width: 600px;
+  width: 100%;
+  background-color: var(--token-bg-elevated);
+  padding: var(--component-modal-padding);
+  border: var(--token-border-width) solid var(--token-border-default);
+  box-shadow: var(--component-modal-shadow);
   text-align: center;
-  background-color: var(--bg);
-  padding: 2.5rem 2rem;
-  border: var(--border-thickness) solid var(--color-text-primary);
-  box-shadow: var(--shadow-offset) var(--shadow-offset) 0px 0px #000000;
 }
 
 .viewport-guard-content h2 {
-  font-size: 2rem;
-  color: var(--color-text-primary);
-  margin-bottom: 1rem;
+  font-size: var(--token-font-size-4xl);
+  color: var(--token-text-primary);
+  margin-bottom: var(--token-space-lg);
   text-transform: uppercase;
 }
 
 .viewport-guard-content p {
-  font-size: 1rem;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
+  font-size: var(--token-font-size-lg);
+  color: var(--token-text-secondary);
+  line-height: var(--token-line-height-relaxed);
 }

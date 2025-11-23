@@ -2,13 +2,15 @@ import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 import './ViewportGuard.css';
 
+const MIN_VIEWPORT_WIDTH = 600;
+
 export const ViewportGuard = () => {
   const [isSmallViewport, setIsSmallViewport] = useState(false);
 
   useEffect(() => {
     const checkViewport = () => {
-      // Consider viewport too small if width < 600px
-      const isTooSmall = window.innerWidth < 600;
+      // Consider viewport too small if width < MIN_VIEWPORT_WIDTH
+      const isTooSmall = window.innerWidth < MIN_VIEWPORT_WIDTH;
       setIsSmallViewport(isTooSmall);
     };
 

@@ -1,118 +1,386 @@
-/* CSS Variables for Retro IBM Terminal Theme */
+/* ============================================================================
+   DESIGN TOKENS - TypeScript Racer
+   A token-based design system for retro terminal aesthetics
+   ============================================================================ */
+
+/* ============================================================================
+   PRIMITIVE TOKENS (Light Theme - Amber Terminal)
+   Raw color and style values - rarely used directly
+   ============================================================================ */
 :root {
-  /* Light Theme - Amber Paper Terminal (like old IBM DOS) */
-  --bg-dark: oklch(0.93 0.05 85);
-  --bg: oklch(0.96 0.04 85);
-  --bg-light: oklch(0.98 0.03 85);
-  --text: oklch(0.25 0.08 40);
-  --text-muted: oklch(0.50 0.06 40);
-  --highlight: oklch(0.65 0.18 60);
-  --border: oklch(0.35 0.08 40);
-  --border-muted: oklch(0.55 0.06 40);
-  --primary: oklch(0.55 0.20 50);
-  --secondary: oklch(0.45 0.16 160);
-  --danger: oklch(0.50 0.22 25);
-  --warning: oklch(0.65 0.18 70);
-  --success: oklch(0.55 0.18 150);
-  --info: oklch(0.55 0.16 240);
+  /* Color Primitives */
+  --primitive-amber-50: oklch(0.98 0.01 85);
+  --primitive-amber-100: oklch(0.96 0.02 85);
+  --primitive-amber-200: oklch(0.93 0.03 85);
+  --primitive-amber-400: oklch(0.65 0.09 60);
+  --primitive-amber-600: oklch(0.55 0.10 50);
+  --primitive-amber-700: oklch(0.50 0.03 40);
+  --primitive-amber-800: oklch(0.35 0.04 40);
+  --primitive-amber-900: oklch(0.25 0.04 40);
   
-  /* Mapped to existing variables for compatibility */
-  --color-background: var(--bg-dark);
-  --color-background-elevated: var(--bg);
-  --color-background-input: var(--bg-light);
+  --primitive-brown-600: oklch(0.45 0.08 160);
+  --primitive-red-600: oklch(0.50 0.11 25);
+  --primitive-yellow-600: oklch(0.65 0.09 70);
+  --primitive-green-600: oklch(0.55 0.09 150);
+  --primitive-blue-600: oklch(0.55 0.08 240);
   
-  --color-text-primary: var(--text);
-  --color-text-secondary: oklch(0.35 0.08 40);
-  --color-text-muted: var(--text-muted);
+  /* Spacing Primitives */
+  --primitive-space-1: 0.25rem;
+  --primitive-space-2: 0.5rem;
+  --primitive-space-3: 0.75rem;
+  --primitive-space-4: 1rem;
+  --primitive-space-5: 1.25rem;
+  --primitive-space-6: 1.5rem;
+  --primitive-space-8: 2rem;
+  --primitive-space-10: 2.5rem;
+  --primitive-space-12: 3rem;
   
-  --color-primary: var(--primary);
-  --color-primary-hover: oklch(0.65 0.20 50);
+  /* Font Size Primitives */
+  --primitive-font-xs: 0.875rem;
+  --primitive-font-sm: 1rem;
+  --primitive-font-base: 1.125rem;
+  --primitive-font-lg: 1.25rem;
+  --primitive-font-xl: 1.5rem;
+  --primitive-font-2xl: 1.75rem;
+  --primitive-font-3xl: 2rem;
+  --primitive-font-4xl: 2.5rem;
+  --primitive-font-5xl: 2.75rem;
+  --primitive-font-6xl: 3.5rem;
   
-  --color-accent-success: var(--success);
-  --color-accent-error: var(--danger);
-  --color-accent-warning: var(--warning);
+  /* Border Primitives */
+  --primitive-border-1: 1px;
+  --primitive-border-2: 2px;
+  --primitive-border-3: 3px;
   
-  /* Syntax Highlighting - Light Theme */
-  --color-syntax-keyword: oklch(0.50 0.20 280);
-  --color-syntax-string: var(--success);
-  --color-syntax-function: oklch(0.45 0.18 240);
-  --color-syntax-comment: var(--text-muted);
-  --color-syntax-number: oklch(0.55 0.18 50);
-  
-  /* Retro Terminal specific */
-  --border-thickness: 2px;
-  --glow-color: rgba(204, 136, 0, 0.15);
+  /* Shadow/Effect Primitives */
+  --primitive-glow-amber-subtle: rgba(204, 136, 0, 0.08);
+  --primitive-glow-amber-medium: rgba(204, 136, 0, 0.2);
+  --primitive-glow-amber-strong: rgba(204, 136, 0, 0.5);
+  --primitive-shadow-black-light: rgba(0, 0, 0, 0.15);
+  --primitive-shadow-black-medium: rgba(0, 0, 0, 0.3);
+  --primitive-shadow-black-heavy: rgba(0, 0, 0, 0.5);
 }
 
-/* Dark Theme - Classic Phosphor Green CRT Terminal */
+/* ============================================================================
+   SEMANTIC TOKENS (Light Theme)
+   Context-specific tokens that reference primitives
+   ============================================================================ */
+:root {
+  /* Background Tokens */
+  --token-bg-base: var(--primitive-amber-200);
+  --token-bg-elevated: var(--primitive-amber-100);
+  --token-bg-input: var(--primitive-amber-50);
+  
+  /* Text Tokens */
+  --token-text-primary: var(--primitive-amber-900);
+  --token-text-secondary: var(--primitive-amber-800);
+  --token-text-muted: var(--primitive-amber-700);
+  --token-text-highlight: var(--primitive-amber-400);
+  
+  /* Border Tokens */
+  --token-border-default: var(--primitive-amber-800);
+  --token-border-muted: var(--primitive-amber-700);
+  --token-border-width: var(--primitive-border-2);
+  
+  /* Brand Tokens */
+  --token-brand-primary: var(--primitive-amber-600);
+  --token-brand-primary-hover: var(--primitive-amber-400);
+  --token-brand-secondary: var(--primitive-brown-600);
+  
+  /* Status Tokens */
+  --token-status-error: var(--primitive-red-600);
+  --token-status-warning: var(--primitive-yellow-600);
+  --token-status-success: var(--primitive-green-600);
+  --token-status-info: var(--primitive-blue-600);
+  
+  /* Effect Tokens */
+  --token-effect-glow: var(--primitive-glow-amber-subtle);
+  --token-effect-glow-strong: var(--primitive-glow-amber-strong);
+  --token-effect-shadow-light: var(--primitive-shadow-black-light);
+  --token-effect-shadow-medium: var(--primitive-shadow-black-medium);
+  --token-effect-shadow-heavy: var(--primitive-shadow-black-heavy);
+  
+  /* Syntax Highlighting Tokens */
+  --token-syntax-keyword: oklch(0.50 0.10 280);
+  --token-syntax-string: var(--primitive-green-600);
+  --token-syntax-function: oklch(0.45 0.09 240);
+  --token-syntax-comment: var(--token-text-muted);
+  --token-syntax-number: oklch(0.55 0.09 50);
+  
+  /* Boot Sequence Tokens */
+  --token-boot-bg: #000000;
+  --token-boot-text: #cc8800;
+  --token-boot-glow: var(--primitive-glow-amber-strong);
+  
+  /* Spacing Tokens */
+  --token-space-xs: var(--primitive-space-1);
+  --token-space-sm: var(--primitive-space-2);
+  --token-space-md: var(--primitive-space-4);
+  --token-space-lg: var(--primitive-space-6);
+  --token-space-xl: var(--primitive-space-8);
+  --token-space-2xl: var(--primitive-space-10);
+  --token-space-3xl: var(--primitive-space-12);
+  
+  /* Typography Tokens */
+  --token-font-size-xs: var(--primitive-font-xs);
+  --token-font-size-sm: var(--primitive-font-sm);
+  --token-font-size-base: var(--primitive-font-base);
+  --token-font-size-lg: var(--primitive-font-lg);
+  --token-font-size-xl: var(--primitive-font-xl);
+  --token-font-size-2xl: var(--primitive-font-2xl);
+  --token-font-size-3xl: var(--primitive-font-3xl);
+  --token-font-size-4xl: var(--primitive-font-4xl);
+  --token-font-size-5xl: var(--primitive-font-5xl);
+  --token-font-size-6xl: var(--primitive-font-6xl);
+  --token-font-family: 'VT323', monospace;
+  --token-font-weight: 400;
+  --token-letter-spacing: 0.5px;
+  --token-line-height-tight: 1.4;
+  --token-line-height-normal: 1.5;
+  --token-line-height-relaxed: 1.6;
+}
+
+/* ============================================================================
+   PRIMITIVE TOKENS (Dark Theme - Green Phosphor Terminal)
+   ============================================================================ */
 .dark {
-  /* Pure black background with vibrant green phosphor glow */
-  --bg-dark: oklch(0.08 0.02 150);
-  --bg: oklch(0.18 0.04 150);
-  --bg-light: oklch(0.24 0.05 150);
-  --text: oklch(0.88 0.24 145);
-  --text-muted: oklch(0.60 0.18 145);
-  --highlight: oklch(0.92 0.28 145);
-  --border: oklch(0.65 0.22 145);
-  --border-muted: oklch(0.45 0.16 145);
-  --primary: oklch(0.85 0.26 145);
-  --secondary: oklch(0.80 0.24 190);
-  --danger: oklch(0.65 0.25 25);
-  --warning: oklch(0.78 0.22 95);
-  --success: oklch(0.75 0.20 155);
-  --info: oklch(0.75 0.20 200);
+  /* Color Primitives */
+  --primitive-green-50: oklch(0.82 0.14 145);
+  --primitive-green-100: oklch(0.78 0.12 145);
+  --primitive-green-200: oklch(0.75 0.13 145);
+  --primitive-green-300: oklch(0.70 0.11 145);
+  --primitive-green-400: oklch(0.60 0.11 145);
+  --primitive-green-600: oklch(0.55 0.09 145);
+  --primitive-green-700: oklch(0.40 0.08 145);
+  --primitive-green-900: oklch(0.24 0.05 150);
+  --primitive-green-950: oklch(0.18 0.04 150);
+  --primitive-green-975: oklch(0.08 0.02 150);
   
-  /* Mapped to existing variables for compatibility */
-  --color-background: var(--bg-dark);
-  --color-background-elevated: var(--bg);
-  --color-background-input: var(--bg-light);
+  --primitive-cyan-600: oklch(0.70 0.12 190);
+  --primitive-lime-600: oklch(0.72 0.11 95);
+  --primitive-emerald-600: oklch(0.70 0.10 155);
+  --primitive-sky-600: oklch(0.70 0.10 200);
+  --primitive-orange-600: oklch(0.60 0.14 25);
   
-  --color-text-primary: var(--text);
-  --color-text-secondary: oklch(0.78 0.22 145);
-  --color-text-muted: var(--text-muted);
-  
-  --color-primary: var(--primary);
-  --color-primary-hover: oklch(0.92 0.28 145);
-  
-  --color-accent-success: var(--success);
-  --color-accent-error: var(--danger);
-  --color-accent-warning: var(--warning);
-  
-  /* Syntax Highlighting - Dark Theme */
-  --color-syntax-keyword: oklch(0.82 0.24 190);
-  --color-syntax-string: oklch(0.78 0.22 95);
-  --color-syntax-function: oklch(0.75 0.20 200);
-  --color-syntax-comment: var(--text-muted);
-  --color-syntax-number: oklch(0.75 0.20 155);
-  
-  /* Retro Terminal specific - Bright green glow */
-  --border-thickness: 2px;
-  --glow-color: rgba(51, 255, 102, 0.5);
+  /* Effect Primitives */
+  --primitive-glow-green-subtle: rgba(51, 255, 102, 0.2);
+  --primitive-glow-green-medium: rgba(51, 255, 102, 0.4);
+  --primitive-glow-green-strong: rgba(51, 255, 51, 0.5);
+  --primitive-shadow-black-heavy: rgba(0, 0, 0, 0.8);
 }
 
-/* Base Styles */
+/* ============================================================================
+   SEMANTIC TOKENS (Dark Theme)
+   ============================================================================ */
+.dark {
+  /* Background Tokens */
+  --token-bg-base: var(--primitive-green-975);
+  --token-bg-elevated: var(--primitive-green-950);
+  --token-bg-input: var(--primitive-green-900);
+  
+  /* Text Tokens */
+  --token-text-primary: var(--primitive-green-100);
+  --token-text-secondary: var(--primitive-green-300);
+  --token-text-muted: var(--primitive-green-600);
+  --token-text-highlight: var(--primitive-green-50);
+  
+  /* Border Tokens */
+  --token-border-default: var(--primitive-green-400);
+  --token-border-muted: var(--primitive-green-700);
+  --token-border-width: var(--primitive-border-2);
+  
+  /* Brand Tokens */
+  --token-brand-primary: var(--primitive-green-200);
+  --token-brand-primary-hover: oklch(0.80 0.15 145);
+  --token-brand-secondary: var(--primitive-cyan-600);
+  
+  /* Status Tokens */
+  --token-status-error: var(--primitive-orange-600);
+  --token-status-warning: var(--primitive-lime-600);
+  --token-status-success: var(--primitive-emerald-600);
+  --token-status-info: var(--primitive-sky-600);
+  
+  /* Effect Tokens */
+  --token-effect-glow: var(--primitive-glow-green-subtle);
+  --token-effect-glow-strong: var(--primitive-glow-green-strong);
+  --token-effect-shadow-light: var(--primitive-shadow-black-light);
+  --token-effect-shadow-medium: var(--primitive-shadow-black-medium);
+  --token-effect-shadow-heavy: var(--primitive-shadow-black-heavy);
+  
+  /* Syntax Highlighting Tokens */
+  --token-syntax-keyword: oklch(0.72 0.12 190);
+  --token-syntax-string: var(--primitive-lime-600);
+  --token-syntax-function: oklch(0.68 0.10 200);
+  --token-syntax-comment: var(--token-text-muted);
+  --token-syntax-number: var(--primitive-emerald-600);
+  
+  /* Boot Sequence Tokens */
+  --token-boot-bg: #000000;
+  --token-boot-text: #33ff33;
+  --token-boot-glow: var(--primitive-glow-green-strong);
+}
+
+/* ============================================================================
+   COMPONENT TOKENS
+   Specific use-case tokens for consistent component styling
+   ============================================================================ */
+:root, .dark {
+  /* Layout */
+  --component-max-width: 1280px;
+  --component-header-height: 80px;
+  --component-header-height-mobile: 50px;
+  
+  /* Cards */
+  --component-card-padding: var(--token-space-xl);
+  --component-card-border: var(--token-border-width) double var(--token-border-default);
+  --component-card-shadow: 0 0 20px var(--token-effect-glow), 
+                           3px 3px 0 var(--token-border-muted),
+                           inset 0 0 20px var(--token-effect-shadow-medium);
+  
+  /* Buttons */
+  --component-button-padding: var(--token-space-sm) var(--token-space-lg);
+  --component-button-border: var(--token-border-width) solid var(--token-border-default);
+  --component-button-shadow: 0 0 10px var(--token-effect-glow);
+  --component-button-shadow-hover: 0 0 20px var(--token-effect-glow);
+  --component-button-shadow-active: inset 0 0 10px var(--token-effect-shadow-heavy);
+  
+  /* Modals */
+  --component-modal-backdrop: rgba(0, 0, 0, 0.9);
+  --component-modal-padding: var(--token-space-2xl) var(--token-space-xl);
+  --component-modal-shadow: 0 0 60px var(--token-effect-glow), 
+                            inset 0 0 20px var(--token-effect-shadow-medium);
+  
+  /* Inputs */
+  --component-input-padding: var(--token-space-sm) var(--token-space-md);
+  --component-input-border: var(--token-border-width) solid var(--token-border-default);
+  
+  /* Scrollbar */
+  --component-scrollbar-width: 16px;
+  --component-scrollbar-track-bg: var(--token-bg-base);
+  --component-scrollbar-thumb-bg: var(--token-text-muted);
+  --component-scrollbar-thumb-hover-bg: var(--token-brand-primary);
+  
+  /* Transitions */
+  --component-transition-fast: 0.15s ease;
+  --component-transition-normal: 0.2s ease;
+  --component-transition-slow: 0.3s ease;
+  
+  /* Z-index */
+  --component-z-header: 1000;
+  --component-z-modal: 10000;
+  --component-z-boot: 99999;
+  --component-z-effects-low: 9997;
+  --component-z-effects-mid: 9998;
+  --component-z-effects-high: 9999;
+}
+
+.dark {
+  --component-card-shadow: 0 0 20px var(--token-effect-glow), 
+                           3px 3px 0 var(--token-border-muted),
+                           inset 0 0 20px var(--primitive-shadow-black-heavy);
+  --component-modal-shadow: 0 0 60px var(--token-effect-glow), 
+                            inset 0 0 30px var(--primitive-shadow-black-heavy);
+}
+
+/* ============================================================================
+   LEGACY COMPATIBILITY ALIASES
+   For gradual migration - these map old variable names to new tokens
+   ============================================================================ */
+:root, .dark {
+  /* Background Aliases */
+  --bg-dark: var(--token-bg-base);
+  --bg: var(--token-bg-elevated);
+  --bg-light: var(--token-bg-input);
+  --color-background: var(--token-bg-base);
+  --color-background-elevated: var(--token-bg-elevated);
+  --color-background-input: var(--token-bg-input);
+  
+  /* Text Aliases */
+  --text: var(--token-text-primary);
+  --text-muted: var(--token-text-muted);
+  --highlight: var(--token-text-highlight);
+  --color-text-primary: var(--token-text-primary);
+  --color-text-secondary: var(--token-text-secondary);
+  --color-text-muted: var(--token-text-muted);
+  
+  /* Border Aliases */
+  --border: var(--token-border-default);
+  --border-muted: var(--token-border-muted);
+  --border-thickness: var(--token-border-width);
+  
+  /* Brand Aliases */
+  --primary: var(--token-brand-primary);
+  --secondary: var(--token-brand-secondary);
+  --color-primary: var(--token-brand-primary);
+  --color-primary-hover: var(--token-brand-primary-hover);
+  
+  /* Status Aliases */
+  --danger: var(--token-status-error);
+  --warning: var(--token-status-warning);
+  --success: var(--token-status-success);
+  --info: var(--token-status-info);
+  --color-accent-success: var(--token-status-success);
+  --color-accent-error: var(--token-status-error);
+  --color-accent-warning: var(--token-status-warning);
+  
+  /* Effect Aliases */
+  --glow-color: var(--token-effect-glow);
+  
+  /* Syntax Highlighting Aliases */
+  --color-syntax-keyword: var(--token-syntax-keyword);
+  --color-syntax-string: var(--token-syntax-string);
+  --color-syntax-function: var(--token-syntax-function);
+  --color-syntax-comment: var(--token-syntax-comment);
+  --color-syntax-number: var(--token-syntax-number);
+  
+  /* Boot Sequence Aliases */
+  --boot-bg: var(--token-boot-bg);
+  --boot-text: var(--token-boot-text);
+  --boot-glow: var(--token-boot-glow);
+}
+
+/* ============================================================================
+   BASE STYLES
+   ============================================================================ */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-}
-
-* {
-  font-family: 'VT323', monospace !important;
+  font-family: var(--token-font-family) !important;
 }
 
 body {
-  font-family: 'VT323', monospace !important;
-  background-color: var(--color-background);
-  color: var(--color-text-primary);
-  transition: background-color 0.2s ease, color 0.2s ease;
+  font-family: var(--token-font-family) !important;
+  background-color: var(--token-bg-base);
+  color: var(--token-text-primary);
+  transition: background-color var(--component-transition-normal), 
+              color var(--component-transition-normal);
   -webkit-font-smoothing: none;
   -moz-osx-font-smoothing: unset;
   font-size: 24px;
-  letter-spacing: 0.5px;
-  font-weight: 400;
+  letter-spacing: var(--token-letter-spacing);
+  font-weight: var(--token-font-weight);
   position: relative;
 }
+
+/* Override bold to use normal weight for VT323 */
+b, strong, .font-bold {
+  font-weight: var(--token-font-weight);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--token-font-family) !important;
+}
+
+code, pre {
+  font-family: var(--token-font-family);
+  font-size: 24px;
+  letter-spacing: var(--token-letter-spacing);
+}
+
+/* ============================================================================
+   RETRO CRT EFFECTS
+   ============================================================================ */
 
 /* CRT Scanline Effect */
 body::before {
@@ -124,42 +392,16 @@ body::before {
   height: 100%;
   background: repeating-linear-gradient(
     0deg,
-    rgba(0, 0, 0, 0.15),
-    rgba(0, 0, 0, 0.15) 1px,
+    var(--token-effect-shadow-light),
+    var(--token-effect-shadow-light) 1px,
     transparent 1px,
     transparent 2.5px
   );
   pointer-events: none;
-  z-index: 9999;
+  z-index: var(--component-z-effects-high);
 }
 
 /* CRT Screen Curvature & Glow */
-.dark body::after {
-  content: "";
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse at center, transparent 0%, rgba(0, 0, 0, 0.3) 100%);
-  pointer-events: none;
-  z-index: 9998;
-}
-
-/* VHS Tracking Noise */
-body {
-  animation: vhs-tracking 0.1s infinite;
-}
-
-@keyframes vhs-tracking {
-  0% {
-    background-position: 0 0;
-  }
-  100% {
-    background-position: 0 100%;
-  }
-}
-
 body::after {
   content: "";
   position: fixed;
@@ -167,126 +409,86 @@ body::after {
   left: 0;
   width: 100%;
   height: 100%;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent 0px,
-    transparent 2px,
-    rgba(255, 255, 255, 0.03) 2px,
-    rgba(255, 255, 255, 0.03) 3px,
-    transparent 3px,
-    transparent 100px
+  background: radial-gradient(
+    ellipse at center, 
+    transparent 0%, 
+    var(--token-effect-shadow-medium) 100%
   );
   pointer-events: none;
-  z-index: 9997;
-  animation: vhs-glitch 4s infinite;
-  opacity: 0;
+  z-index: var(--component-z-effects-mid);
 }
 
-@keyframes vhs-glitch {
-  0%, 95% {
-    opacity: 0;
-    transform: translateY(0);
-  }
-  96% {
-    opacity: 1;
-    transform: translateY(0);
-  }
-  97% {
-    opacity: 0.8;
-    transform: translateY(-5px);
-  }
-  98% {
-    opacity: 0.6;
-    transform: translateY(3px);
-  }
-  99%, 100% {
-    opacity: 0;
-    transform: translateY(0);
-  }
-}
-
-/* Text glow effect for dark mode */
-.dark {
-  text-shadow: 0 0 5px var(--glow-color), 0 0 10px var(--glow-color);
+/* Text glow effect */
+html {
+  text-shadow: 0 0 3px var(--token-effect-glow);
   animation: crt-flicker 0.15s infinite;
+}
+
+/* Occasional brightness pulse */
+.app-container {
+  animation: brightness-pulse 3s ease-in-out infinite;
+}
+
+/* ============================================================================
+   ANIMATIONS
+   ============================================================================ */
+
+/* VHS Tracking Noise */
+@keyframes vhs-tracking {
+  0% { background-position: 0 0; }
+  100% { background-position: 0 100%; }
 }
 
 /* Subtle CRT Flicker */
 @keyframes crt-flicker {
-  0% {
-    opacity: 0.98;
-  }
-  50% {
-    opacity: 1;
-  }
-  100% {
-    opacity: 0.98;
-  }
+  0% { opacity: 0.98; }
+  50% { opacity: 1; }
+  100% { opacity: 0.98; }
 }
 
-/* Occasional brightness pulse */
-.dark .app-container {
-  animation: brightness-pulse 3s ease-in-out infinite;
-}
-
+/* Brightness pulse */
 @keyframes brightness-pulse {
-  0%, 100% {
-    filter: brightness(1);
-  }
-  50% {
-    filter: brightness(1.02);
-  }
+  0%, 100% { filter: brightness(1); }
+  50% { filter: brightness(1.02); }
 }
 
-/* Override bold to use normal weight for VT323 */
-b, strong, .font-bold {
-  font-weight: 400;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  font-family: 'VT323', monospace !important;
-}
-
-code, pre {
-  font-family: 'VT323', monospace;
-  font-size: 24px;
-  letter-spacing: 0.5px;
-}
-
-/* Custom Scrollbar - Retro Style */
+/* ============================================================================
+   SCROLLBAR STYLING
+   ============================================================================ */
 ::-webkit-scrollbar {
-  width: 16px;
-  height: 16px;
+  width: var(--component-scrollbar-width);
+  height: var(--component-scrollbar-width);
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bg-dark);
-  border: 1px solid var(--border);
+  background: var(--component-scrollbar-track-bg);
+  border: var(--primitive-border-1) solid var(--token-border-default);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--color-text-muted);
-  border: 1px solid var(--border);
+  background: var(--component-scrollbar-thumb-bg);
+  border: var(--primitive-border-1) solid var(--token-border-default);
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary);
+  background: var(--component-scrollbar-thumb-hover-bg);
 }
 
 ::-webkit-scrollbar-corner {
-  background: var(--bg-dark);
+  background: var(--component-scrollbar-track-bg);
 }
 
-/* Selection Color */
+/* ============================================================================
+   SELECTION & FOCUS STYLES
+   ============================================================================ */
 ::selection {
-  background-color: var(--color-primary);
-  color: var(--color-background);
+  background-color: var(--token-brand-primary);
+  color: var(--token-bg-base);
   text-shadow: none;
 }
 
-/* Focus Styles - Retro */
 :focus-visible {
-  outline: 2px solid var(--color-primary);
+  outline: var(--token-border-width) solid var(--token-brand-primary);
   outline-offset: 0px;
-  box-shadow: 0 0 10px var(--glow-color);
+  box-shadow: 0 0 10px var(--token-effect-glow);
 }

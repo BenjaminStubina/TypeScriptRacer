@@ -1,8 +1,11 @@
-/* App Layout */
+/* ============================================================================
+   APP LAYOUT
+   ============================================================================ */
 .app-container {
-  background-color: var(--bg-dark);
+  background-color: var(--token-bg-base);
   min-height: 100vh;
-  transition: background-color 0.2s, color 0.2s;
+  transition: background-color var(--component-transition-normal), 
+              color var(--component-transition-normal);
 }
 
 .app-content {
@@ -22,77 +25,76 @@
 }
 
 .main-content {
-  max-width: 1280px;
+  max-width: var(--component-max-width);
   margin: 0 auto;
-  padding: 3rem 1.5rem;
+  padding: var(--token-space-3xl) var(--token-space-lg);
 }
 
 .content-wrapper {
   display: flex;
   flex-direction: column;
-  gap: 2rem;
+  gap: var(--token-space-xl);
 }
 
-/* Title Section */
+/* ============================================================================
+   TITLE SECTION
+   ============================================================================ */
 .title-section {
   text-align: center;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--token-space-md);
 }
 
 .title-section h2 {
-  font-size: 2.75rem;
-  color: var(--color-text-primary);
+  font-size: var(--token-font-size-5xl);
+  color: var(--token-text-primary);
 }
 
 .title-section h2::before {
   content: '$ ';
-  color: var(--color-primary);
+  color: var(--token-brand-primary);
   opacity: 0.8;
-  margin-right: 0.25rem;
+  margin-right: var(--token-space-xs);
 }
 
 .title-section p {
-  font-size: 1.5rem;
-  color: var(--color-text-secondary);
+  font-size: var(--token-font-size-xl);
+  color: var(--token-text-secondary);
   max-width: 42rem;
   margin: 0 auto;
 }
 
-/* Card Styles - DOS-style Terminal Windows */
+/* ============================================================================
+   CARDS
+   ============================================================================ */
 .card {
-  background-color: var(--bg);
-  padding: 2rem;
-  border: 3px double var(--border);
-  box-shadow: 0 0 20px var(--glow-color), 
-              3px 3px 0 var(--border-muted);
+  background-color: var(--token-bg-elevated);
+  padding: var(--component-card-padding);
+  border: var(--component-card-border);
+  box-shadow: var(--component-card-shadow);
   position: relative;
 }
 
-.dark .card {
-  box-shadow: 0 0 20px var(--glow-color), 
-              3px 3px 0 var(--border-muted),
-              inset 0 0 20px rgba(0, 0, 0, 0.5);
-}
-
 .card-title {
-  font-size: 1.75rem;
-  color: var(--color-text-primary);
-  margin-bottom: 1.5rem;
+  font-size: var(--token-font-size-2xl);
+  color: var(--token-text-primary);
+  margin-bottom: var(--token-space-lg);
 }
 
 .card-title::before {
   content: '$ ';
-  color: var(--color-primary);
+  color: var(--token-brand-primary);
   opacity: 0.8;
 }
 
-/* Grid Layouts */
+/* ============================================================================
+   GRID LAYOUTS
+   ============================================================================ */
 .grid-3col {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 1.5rem;
+  gap: var(--token-space-lg);
 }
 
 @media (min-width: 768px) {
@@ -107,51 +109,50 @@
   }
 }
 
-/* Color Cards - DOS-style boxes */
+/* ============================================================================
+   COLOR CARDS
+   ============================================================================ */
 .color-card {
-  padding: 1.5rem;
-  border: 2px double var(--border);
-  box-shadow: 0 0 10px var(--glow-color),
-              2px 2px 0 var(--border-muted);
+  padding: var(--token-space-lg);
+  border: var(--token-border-width) double var(--token-border-default);
+  box-shadow: 0 0 15px var(--token-effect-glow),
+              2px 2px 0 var(--token-border-muted);
   position: relative;
-}
-
-.dark .color-card {
-  box-shadow: 0 0 15px var(--glow-color),
-              2px 2px 0 var(--border-muted);
 }
 
 .color-card-content {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem;
+  gap: var(--token-space-sm);
 }
 
 .color-card h4 {
-  font-size: 1.5rem;
+  font-size: var(--token-font-size-xl);
   text-transform: uppercase;
 }
 
 .color-swatch {
-  background-color: var(--bg-dark);
-  border: 1px solid var(--border);
-  padding: 0.75rem;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.2);
+  background-color: var(--token-bg-base);
+  border: var(--primitive-border-1) solid var(--token-border-default);
+  padding: var(--token-space-sm);
+  box-shadow: inset 0 0 10px var(--token-effect-shadow-light);
 }
 
 .color-swatch p {
-  font-size: 1rem;
-  font-family: 'VT323', monospace;
-  color: var(--color-text-primary);
+  font-size: var(--token-font-size-sm);
+  font-family: var(--token-font-family);
+  color: var(--token-text-primary);
 }
 
 .color-card p {
-  font-size: 1.125rem;
+  font-size: var(--token-font-size-base);
 }
 
-/* Color Variants */
+/* ============================================================================
+   COLOR VARIANTS
+   ============================================================================ */
 .bg-primary {
-  background-color: var(--color-primary);
+  background-color: var(--token-brand-primary);
 }
 
 .bg-primary h4,
@@ -160,7 +161,7 @@
 }
 
 .bg-secondary {
-  background-color: var(--secondary);
+  background-color: var(--token-brand-secondary);
 }
 
 .bg-secondary h4,
@@ -169,7 +170,7 @@
 }
 
 .bg-success {
-  background-color: var(--success);
+  background-color: var(--token-status-success);
 }
 
 .bg-success h4,
@@ -178,7 +179,7 @@
 }
 
 .bg-danger {
-  background-color: var(--danger);
+  background-color: var(--token-status-error);
 }
 
 .bg-danger h4,
@@ -187,7 +188,7 @@
 }
 
 .bg-warning {
-  background-color: var(--warning);
+  background-color: var(--token-status-warning);
 }
 
 .bg-warning h4,
@@ -196,7 +197,7 @@
 }
 
 .bg-info {
-  background-color: var(--info);
+  background-color: var(--token-status-info);
 }
 
 .bg-info h4,
@@ -204,104 +205,112 @@
   color: white;
 }
 
-/* Background Color Cards */
+/* ============================================================================
+   BACKGROUND COLOR CARDS
+   ============================================================================ */
 .bg-surface-dark {
-  background-color: var(--bg-dark);
+  background-color: var(--token-bg-base);
 }
 
 .bg-surface-dark .card-text {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: var(--token-space-sm);
 }
 
 .bg-surface-dark h4 {
-  color: var(--color-text-primary);
+  color: var(--token-text-primary);
   text-transform: uppercase;
 }
 
 .bg-surface-dark .color-code {
-  color: var(--color-text-secondary);
-  font-size: 0.75rem;
-  font-family: 'VT323', monospace;
+  color: var(--token-text-secondary);
+  font-size: var(--token-font-size-xs);
+  font-family: var(--token-font-family);
 }
 
 .bg-surface-dark p {
-  color: var(--color-text-primary);
-  font-size: 0.875rem;
+  color: var(--token-text-primary);
+  font-size: var(--token-font-size-xs);
 }
 
-/* Code Sample - Terminal Code Block */
+/* ============================================================================
+   CODE SAMPLE
+   ============================================================================ */
 .code-sample {
-  background-color: var(--bg-dark);
-  padding: 1rem;
-  border: var(--border-thickness) solid var(--border);
-  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.3);
-  font-family: 'VT323', monospace;
-  font-size: 1.125rem;
+  background-color: var(--token-bg-base);
+  padding: var(--token-space-md);
+  border: var(--token-border-width) solid var(--token-border-default);
+  box-shadow: inset 0 0 15px var(--token-effect-shadow-medium), 
+              0 0 10px var(--token-effect-glow);
+  font-family: var(--token-font-family);
+  font-size: var(--token-font-size-base);
   position: relative;
 }
 
 .dark .code-sample {
-  box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.8), 0 0 10px var(--glow-color);
+  box-shadow: inset 0 0 20px var(--primitive-shadow-black-heavy), 
+              0 0 10px var(--token-effect-glow);
 }
 
 .code-lines {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--token-space-xs);
 }
 
 .code-line {
-  line-height: 1.5;
+  line-height: var(--token-line-height-normal);
 }
 
 .code-indent {
-  padding-left: 1rem;
+  padding-left: var(--token-space-md);
 }
 
 .syntax-keyword {
-  color: var(--color-syntax-keyword);
+  color: var(--token-syntax-keyword);
 }
 
 .syntax-function {
-  color: var(--color-syntax-function);
+  color: var(--token-syntax-function);
 }
 
 .syntax-number {
-  color: var(--color-syntax-number);
+  color: var(--token-syntax-number);
 }
 
 .text-primary-color {
-  color: var(--color-text-primary);
+  color: var(--token-text-primary);
 }
 
-/* Buttons - Retro Terminal Style */
+/* ============================================================================
+   BUTTONS
+   ============================================================================ */
 .button-group {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
-  margin-top: 1.5rem;
+  gap: var(--token-space-md);
+  margin-top: var(--token-space-lg);
 }
 
 .btn {
-  padding: 0.75rem 1.5rem;
-  border: var(--border-thickness) solid var(--border);
-  box-shadow: 0 0 10px var(--glow-color);
+  padding: var(--component-button-padding);
+  border: var(--component-button-border);
+  box-shadow: var(--component-button-shadow);
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: all var(--component-transition-fast);
   position: relative;
 }
 
 .btn::before {
   content: '> ';
-  margin-right: 0.5rem;
+  margin-right: var(--token-space-sm);
   opacity: 0.7;
 }
 
 .btn:hover {
-  box-shadow: 0 0 20px var(--glow-color);
+  box-shadow: var(--component-button-shadow-hover);
   filter: brightness(1.2);
 }
 
@@ -320,60 +329,62 @@
 }
 
 .btn:active {
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--component-button-shadow-active);
   filter: brightness(0.9);
 }
 
 .btn-primary {
-  background-color: var(--bg-light);
-  color: var(--color-primary);
-  border-color: var(--color-primary);
+  background-color: var(--token-bg-input);
+  color: var(--token-brand-primary);
+  border-color: var(--token-brand-primary);
+  box-shadow: 0 0 15px var(--token-effect-glow);
 }
 
 .dark .btn-primary {
-  background-color: var(--bg-dark);
-  box-shadow: 0 0 15px var(--glow-color);
+  background-color: var(--token-bg-base);
 }
 
 .btn-secondary {
-  background-color: var(--bg);
-  color: var(--color-text-primary);
-  border-color: var(--border);
+  background-color: var(--token-bg-elevated);
+  color: var(--token-text-primary);
+  border-color: var(--token-border-default);
 }
 
-/* Typography Section */
+/* ============================================================================
+   TYPOGRAPHY
+   ============================================================================ */
 .typography-section {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: var(--token-space-md);
 }
 
 .typography-item {
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: var(--token-space-xs);
 }
 
 .typography-item .demo-title {
-  font-size: 1.5rem;
+  font-size: var(--token-font-size-xl);
 }
 
 .typography-item .demo-text {
-  font-size: 1.125rem;
+  font-size: var(--token-font-size-base);
 }
 
 .text-primary {
-  color: var(--color-text-primary);
+  color: var(--token-text-primary);
 }
 
 .text-secondary {
-  color: var(--color-text-secondary);
+  color: var(--token-text-secondary);
 }
 
 .text-muted {
-  color: var(--color-text-muted);
+  color: var(--token-text-muted);
 }
 
 .font-mono {
-  font-family: 'VT323', monospace;
+  font-family: var(--token-font-family);
 }
