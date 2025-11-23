@@ -1,17 +1,19 @@
-/* Boot Sequence Overlay */
+/* ============================================================================
+   BOOT SEQUENCE - Retro Terminal Startup
+   ============================================================================ */
 .boot-sequence-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: #000000;
-  z-index: 99999;
+  background-color: var(--token-boot-bg);
+  z-index: var(--component-z-boot);
   display: flex;
   align-items: flex-start;
   justify-content: flex-start;
-  padding: 2rem;
-  animation: fadeIn 0.3s ease;
+  padding: var(--token-space-xl);
+  animation: fadeIn var(--component-transition-slow) ease;
 }
 
 @keyframes fadeIn {
@@ -37,11 +39,11 @@
 }
 
 .boot-sequence-content {
-  font-family: 'VT323', monospace;
-  font-size: 1.25rem;
-  color: #33ff33;
-  text-shadow: 0 0 5px rgba(51, 255, 51, 0.5);
-  line-height: 1.4;
+  font-family: var(--token-font-family);
+  font-size: var(--token-font-size-lg);
+  color: var(--token-boot-text);
+  text-shadow: 0 0 5px var(--token-boot-glow);
+  line-height: var(--token-line-height-tight);
   width: 100%;
 }
 
@@ -53,7 +55,7 @@
 .boot-cursor {
   display: inline-block;
   animation: blink-boot 1s step-end infinite;
-  margin-left: 0.25rem;
+  margin-left: var(--token-space-xs);
 }
 
 @keyframes blink-boot {

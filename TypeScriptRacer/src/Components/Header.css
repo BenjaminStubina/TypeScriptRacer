@@ -1,20 +1,18 @@
-/* Header Styles - Retro Terminal */
+/* ============================================================================
+   HEADER - Retro Terminal
+   ============================================================================ */
 .header-container {
-  background-color: var(--bg-dark);
-  border-bottom: var(--border-thickness) solid var(--border);
-  padding: 1rem 1.5rem;
-  box-shadow: 0 2px 20px var(--glow-color);
+  background-color: var(--token-bg-base);
+  border-bottom: var(--token-border-width) solid var(--token-border-default);
+  padding: var(--token-space-md) var(--token-space-lg);
+  box-shadow: 0 2px 30px var(--token-effect-glow);
   position: sticky;
   top: 0;
-  z-index: 1000;
-}
-
-.dark .header-container {
-  box-shadow: 0 2px 30px var(--glow-color);
+  z-index: var(--component-z-header);
 }
 
 .header-content {
-  max-width: 1280px;
+  max-width: var(--component-max-width);
   margin: 0 auto;
   display: flex;
   align-items: center;
@@ -23,73 +21,78 @@
 }
 
 .header-title {
-  font-size: 3.5rem;
-  color: var(--color-text-primary);
+  font-size: var(--token-font-size-6xl);
+  color: var(--token-text-primary);
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 80px;
-  gap: 0.5rem;
+  min-height: var(--component-header-height);
+  gap: var(--token-space-sm);
 }
 
 .terminal-prompt {
-  color: var(--color-primary);
-  margin-right: 0.25rem;
+  color: var(--token-brand-primary);
+  margin-right: var(--token-space-xs);
   opacity: 0.9;
 }
 
 .terminal-command {
-  color: var(--secondary);
-  margin-right: 0.5rem;
+  color: var(--token-brand-secondary);
+  margin-right: var(--token-space-sm);
   opacity: 0.85;
 }
 
-/* Responsive header sizing */
+/* ============================================================================
+   RESPONSIVE HEADER
+   ============================================================================ */
 @media (max-width: 768px) {
   .header-title {
-    font-size: 2rem;
-    min-height: 50px;
-    gap: 0.25rem;
+    font-size: var(--token-font-size-3xl);
+    min-height: var(--component-header-height-mobile);
+    gap: var(--token-space-xs);
   }
   
   .header-about-button {
-    font-size: 0.875rem;
+    font-size: var(--token-font-size-xs);
     padding: 0.4rem 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .header-title {
-    font-size: 1.5rem;
+    font-size: var(--token-font-size-xl);
     min-height: 40px;
-    gap: 0.25rem;
+    gap: var(--token-space-xs);
   }
 }
 
+/* ============================================================================
+   ABOUT BUTTON
+   ============================================================================ */
 .header-about-button {
-  padding: 0.5rem 1rem;
-  background-color: var(--bg);
-  border: var(--border-thickness) solid var(--border);
-  color: var(--color-text-primary);
+  padding: var(--token-space-sm) var(--token-space-md);
+  background-color: var(--token-bg-elevated);
+  border: var(--token-border-width) solid var(--token-border-default);
+  color: var(--token-text-primary);
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1.125rem;
+  font-size: var(--token-font-size-base);
   cursor: pointer;
-  transition: all 0.2s;
-  box-shadow: 0 0 10px var(--glow-color);
+  transition: all var(--component-transition-normal);
+  box-shadow: var(--component-button-shadow);
 }
 
 .header-about-button::before {
   content: '> ';
   opacity: 0.7;
-  margin-right: 0.25rem;
+  margin-right: var(--token-space-xs);
 }
 
 .header-about-button:hover {
-  background-color: var(--bg-light);
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-  box-shadow: 0 0 20px var(--glow-color);
+  background-color: var(--token-bg-input);
+  color: var(--token-brand-primary);
+  border-color: var(--token-brand-primary);
+  box-shadow: var(--component-button-shadow-hover);
   filter: brightness(1.2);
 }
 
@@ -98,18 +101,20 @@
 }
 
 .header-about-button:active {
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--component-button-shadow-active);
   filter: brightness(0.9);
 }
 
-.header-theme-toggle {
-}
-
+/* ============================================================================
+   TITLE STYLING
+   ============================================================================ */
 .title-primary-text {
-  color: var(--color-primary);
+  color: var(--token-brand-primary);
 }
 
-/* Blinking Cursor Animation */
+/* ============================================================================
+   BLINKING CURSOR
+   ============================================================================ */
 @keyframes blink {
   0%, 49% {
     opacity: 1;
@@ -124,7 +129,7 @@
   display: inline-block;
   width: 20px;
   height: 1em;
-  background-color: var(--color-text-primary);
+  background-color: var(--token-text-primary);
   vertical-align: text-bottom;
 }
 

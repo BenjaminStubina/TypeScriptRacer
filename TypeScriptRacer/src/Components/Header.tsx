@@ -12,92 +12,105 @@ const typos = [
   { text: 'Type<Scrupt>Racer', position: 14, correctPos: 5 }, // "Scrupt" - backtrack to "Type<"
 ]
 
+type AnimationState = 
+  | 'typing'
+  | 'paused'
+  | 'pausedAfterErase'
+  | 'fixingTypo'
+  | 'pausedAfterTypo'
+  | 'pausedAfterFixing'
+  | 'typingCorrection'
+  | 'erasing'
+
+const FULL_TEXT = 'Type<Script>Racer'
+
 export function Header() {
-  const fullText = 'Type<Script>Racer'
-  
   const [currentTypo, setCurrentTypo] = useState(() => typos[Math.floor(Math.random() * typos.length)])
   const [displayText, setDisplayText] = useState('')
-  const [isTyping, setIsTyping] = useState(true)
-  const [isPaused, setIsPaused] = useState(false)
-  const [isPausedAfterErase, setIsPausedAfterErase] = useState(false)
-  const [isFixingTypo, setIsFixingTypo] = useState(false)
-  const [isPausedAfterTypo, setIsPausedAfterTypo] = useState(false)
-  const [isPausedAfterFixing, setIsPausedAfterFixing] = useState(false)
-  const [isTypingCorrection, setIsTypingCorrection] = useState(false)
+  const [animationState, setAnimationState] = useState<AnimationState>('typing')
   const [isAboutModalOpen, setIsAboutModalOpen] = useState(false)
 
   useEffect(() => {
     let timeout: number
 
-    if (isPaused) {
-      // Pause for 8 seconds when text is complete
-      timeout = setTimeout(() => {
-        setIsPaused(false)
-        setIsTyping(false)
-      }, 8000)
-    } else if (isPausedAfterErase) {
-      // Pause for 2 seconds after erasing before typing again
-      timeout = setTimeout(() => {
-        setIsPausedAfterErase(false)
-        setIsTyping(true)
-        // Select a new random typo for the next loop
-        setCurrentTypo(typos[Math.floor(Math.random() * typos.length)])
-      }, 2000)
-    } else if (isPausedAfterTypo) {
-      // Pause briefly after making typo before fixing it
-      timeout = setTimeout(() => {
-        setIsPausedAfterTypo(false)
-        setIsFixingTypo(true)
-      }, 1000)
-    } else if (isFixingTypo) {
-      // Erase back to correct position
-      if (displayText.length > currentTypo.correctPos) {
+    switch (animationState) {
+      case 'paused':
+        // Pause for 8 seconds when text is complete
         timeout = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1))
-        }, 80) // Faster erase for fixing typo
-      } else {
-        setIsFixingTypo(false)
-        setIsPausedAfterFixing(true)
-      }
-    } else if (isPausedAfterFixing) {
-      // Pause briefly after erasing typo before typing correction
-      timeout = setTimeout(() => {
-        setIsPausedAfterFixing(false)
-        setIsTypingCorrection(true)
-      }, 500)
-    } else if (isTypingCorrection) {
-      // Type the correct version
-      if (displayText.length < fullText.length) {
+          setAnimationState('erasing')
+        }, 8000)
+        break
+
+      case 'pausedAfterErase':
+        // Pause for 2 seconds after erasing before typing again
         timeout = setTimeout(() => {
-          setDisplayText(fullText.slice(0, displayText.length + 1))
-        }, 150)
-      } else {
-        setIsTypingCorrection(false)
-        setIsPaused(true)
-      }
-    } else if (isTyping) {
-      // Initial typing animation with typo
-      if (displayText.length < currentTypo.position) {
+          setAnimationState('typing')
+          // Select a new random typo for the next loop
+          setCurrentTypo(typos[Math.floor(Math.random() * typos.length)])
+        }, 2000)
+        break
+
+      case 'pausedAfterTypo':
+        // Pause briefly after making typo before fixing it
         timeout = setTimeout(() => {
-          setDisplayText(currentTypo.text.slice(0, displayText.length + 1))
-        }, 150) // Type speed
-      } else {
-        setIsTyping(false)
-        setIsPausedAfterTypo(true)
-      }
-    } else {
-      // Erasing animation (final erase at end)
-      if (displayText.length > 0) {
+          setAnimationState('fixingTypo')
+        }, 1000)
+        break
+
+      case 'fixingTypo':
+        // Erase back to correct position
+        if (displayText.length > currentTypo.correctPos) {
+          timeout = setTimeout(() => {
+            setDisplayText(displayText.slice(0, -1))
+          }, 80) // Faster erase for fixing typo
+        } else {
+          setAnimationState('pausedAfterFixing')
+        }
+        break
+
+      case 'pausedAfterFixing':
+        // Pause briefly after erasing typo before typing correction
         timeout = setTimeout(() => {
-          setDisplayText(displayText.slice(0, -1))
-        }, 100) // Erase speed
-      } else {
-        setIsPausedAfterErase(true)
-      }
+          setAnimationState('typingCorrection')
+        }, 500)
+        break
+
+      case 'typingCorrection':
+        // Type the correct version
+        if (displayText.length < FULL_TEXT.length) {
+          timeout = setTimeout(() => {
+            setDisplayText(FULL_TEXT.slice(0, displayText.length + 1))
+          }, 150)
+        } else {
+          setAnimationState('paused')
+        }
+        break
+
+      case 'typing':
+        // Initial typing animation with typo
+        if (displayText.length < currentTypo.position) {
+          timeout = setTimeout(() => {
+            setDisplayText(currentTypo.text.slice(0, displayText.length + 1))
+          }, 150) // Type speed
+        } else {
+          setAnimationState('pausedAfterTypo')
+        }
+        break
+
+      case 'erasing':
+        // Erasing animation (final erase at end)
+        if (displayText.length > 0) {
+          timeout = setTimeout(() => {
+            setDisplayText(displayText.slice(0, -1))
+          }, 100) // Erase speed
+        } else {
+          setAnimationState('pausedAfterErase')
+        }
+        break
     }
 
     return () => clearTimeout(timeout)
-  }, [displayText, isTyping, isPaused, isPausedAfterErase, isFixingTypo, isPausedAfterTypo, isPausedAfterFixing, isTypingCorrection, fullText, currentTypo])
+  }, [displayText, animationState, currentTypo])
 
   // Parse the display text to identify the <Script> part and show typo underline
   const renderText = () => {
@@ -105,7 +118,7 @@ export function Header() {
     // Extract the typo word from currentTypo.text (e.g., "Scropt" from "Type<Scropt>Racer")
     const typoMatch = currentTypo.text.match(/<([^>]+)>/)
     const typoWord = typoMatch ? typoMatch[1] : ''
-    const hasTypo = displayText.includes(`<${typoWord}`) && (isPausedAfterTypo || isFixingTypo)
+    const hasTypo = displayText.includes(`<${typoWord}`) && (animationState === 'pausedAfterTypo' || animationState === 'fixingTypo')
     
     const scriptStart = displayText.indexOf('<Script>')
     const typoStart = displayText.indexOf(`<${typoWord}`)

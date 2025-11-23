@@ -1,43 +1,41 @@
-/* About Modal Overlay - Retro Terminal */
+/* ============================================================================
+   ABOUT MODAL - Retro Terminal
+   ============================================================================ */
 .about-modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.9);
+  background-color: var(--component-modal-backdrop);
   backdrop-filter: blur(8px);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10000;
-  padding: 1.5rem;
+  z-index: var(--component-z-modal);
+  padding: var(--token-space-lg);
 }
 
 .about-modal-content {
   max-width: 600px;
   width: 100%;
-  background-color: var(--bg);
-  padding: 2.5rem 2rem;
-  border: var(--border-thickness) solid var(--border);
-  box-shadow: 0 0 40px var(--glow-color), inset 0 0 20px rgba(0, 0, 0, 0.3);
+  background-color: var(--token-bg-elevated);
+  padding: var(--component-modal-padding);
+  border: var(--token-border-width) solid var(--token-border-default);
+  box-shadow: var(--component-modal-shadow);
   position: relative;
   max-height: 90vh;
   overflow-y: auto;
 }
 
-.dark .about-modal-content {
-  box-shadow: 0 0 60px var(--glow-color), inset 0 0 30px rgba(0, 0, 0, 0.8);
-}
-
 .about-modal-close {
   position: absolute;
-  top: 1rem;
-  right: 1rem;
+  top: var(--token-space-md);
+  right: var(--token-space-md);
   background: none;
   border: none;
-  font-size: 2.5rem;
-  color: var(--color-text-primary);
+  font-size: var(--token-font-size-4xl);
+  color: var(--token-text-primary);
   cursor: pointer;
   line-height: 1;
   padding: 0;
@@ -46,39 +44,39 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: color 0.2s;
+  transition: color var(--component-transition-normal);
 }
 
 .about-modal-close:hover {
-  color: var(--color-primary);
+  color: var(--token-brand-primary);
 }
 
 .about-modal-content h2 {
-  font-size: 2.5rem;
-  color: var(--color-text-primary);
-  margin-bottom: 1.5rem;
+  font-size: var(--token-font-size-4xl);
+  color: var(--token-text-primary);
+  margin-bottom: var(--token-space-lg);
   text-transform: uppercase;
   text-align: center;
 }
 
 .about-modal-body {
-  color: var(--color-text-secondary);
+  color: var(--token-text-secondary);
 }
 
 .about-modal-body p {
-  font-size: 1.25rem;
-  line-height: 1.6;
-  margin-bottom: 1rem;
+  font-size: var(--token-font-size-lg);
+  line-height: var(--token-line-height-relaxed);
+  margin-bottom: var(--token-space-md);
 }
 
 .about-modal-body p:last-of-type {
-  margin-bottom: 1.5rem;
+  margin-bottom: var(--token-space-lg);
 }
 
 .inline-link {
-  color: var(--color-primary);
+  color: var(--token-brand-primary);
   text-decoration: underline;
-  transition: opacity 0.2s;
+  transition: opacity var(--component-transition-normal);
 }
 
 .inline-link:hover {
@@ -87,36 +85,36 @@
 
 .about-modal-socials {
   display: flex;
-  gap: 1rem;
+  gap: var(--token-space-md);
   flex-wrap: wrap;
   justify-content: center;
-  margin-top: 2rem;
+  margin-top: var(--token-space-xl);
 }
 
 .social-link {
-  padding: 0.75rem 1.5rem;
-  background-color: var(--bg-light);
-  border: var(--border-thickness) solid var(--border);
-  color: var(--color-text-primary);
+  padding: var(--token-space-sm) var(--token-space-lg);
+  background-color: var(--token-bg-input);
+  border: var(--token-border-width) solid var(--token-border-default);
+  color: var(--token-text-primary);
   text-decoration: none;
   text-transform: uppercase;
   font-weight: 600;
-  font-size: 1.125rem;
-  transition: all 0.2s;
-  box-shadow: 0 0 10px var(--glow-color);
+  font-size: var(--token-font-size-base);
+  transition: all var(--component-transition-normal);
+  box-shadow: var(--component-button-shadow);
 }
 
 .social-link::before {
   content: '> ';
   opacity: 0.7;
-  margin-right: 0.25rem;
+  margin-right: var(--token-space-xs);
 }
 
 .social-link:hover {
-  background-color: var(--bg-dark);
-  color: var(--color-primary);
-  border-color: var(--color-primary);
-  box-shadow: 0 0 25px var(--glow-color);
+  background-color: var(--token-bg-base);
+  color: var(--token-brand-primary);
+  border-color: var(--token-brand-primary);
+  box-shadow: 0 0 25px var(--token-effect-glow);
   filter: brightness(1.2);
 }
 
@@ -125,6 +123,6 @@
 }
 
 .social-link:active {
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+  box-shadow: var(--component-button-shadow-active);
   filter: brightness(0.9);
 }

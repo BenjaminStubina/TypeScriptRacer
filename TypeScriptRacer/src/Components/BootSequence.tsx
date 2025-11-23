@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import './BootSequence.css'
 
 export function BootSequence({ onComplete }: { onComplete: () => void }) {
   const [lines, setLines] = useState<string[]>([])
   const [isComplete, setIsComplete] = useState(false)
+
+  // Memoize onComplete to prevent unnecessary re-renders
+  const handleComplete = useCallback(() => {
+    onComplete()
+  }, [onComplete])
 
   const bootMessages = [
     'TypeScript Racer BIOS v1.0',
@@ -30,7 +35,7 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
     
     if (hasBooted) {
       setIsComplete(true)
-      onComplete()
+      handleComplete()
       return
     }
 
@@ -51,14 +56,15 @@ export function BootSequence({ onComplete }: { onComplete: () => void }) {
           // Wait for fade animation then complete
           setTimeout(() => {
             setIsComplete(true)
-            onComplete()
+            handleComplete()
           }, 800)
         }, 500)
       }
     }, 150) // Speed of boot messages
 
     return () => clearInterval(interval)
-  }, [onComplete])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [handleComplete])
 
   if (isComplete) {
     return null
