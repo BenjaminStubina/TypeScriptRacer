@@ -3,9 +3,23 @@ import { useState } from 'react'
 import { Header } from './Components/Header'
 import { ViewportGuard } from './Components/ViewportGuard'
 import { BootSequence } from './Components/BootSequence'
+import { CodeEditor } from './Components/CodeEditor'
+import type { TypingStats } from './hooks/useTypingGame'
 
 function App() {
   const [bootComplete, setBootComplete] = useState(false)
+
+  // Sample code snippet for the typing game
+  const sampleCode = `function calculateWPM(chars: number, time: number) {
+  const words = chars / 5;
+  return (words / time) * 60;
+}`
+
+  // Handle game completion
+  const handleComplete = (stats: TypingStats) => {
+    console.log('Game completed!', stats)
+    // You can add logic here to save scores, show results modal, etc.
+  }
 
   return (
       <div className="app-container">
@@ -26,6 +40,18 @@ function App() {
             <p>
               Improve your coding speed and accuracy by racing to type real code snippets
             </p>
+          </div>
+
+          {/* Code Editor Typing Game */}
+          <div className="card">
+            <h3 className="card-title">
+              Typing Game Demo
+            </h3>
+            <CodeEditor 
+              targetCode={sampleCode}
+              language="typescript"
+              onComplete={handleComplete}
+            />
           </div>
 
           {/* Color Palette Cards */}

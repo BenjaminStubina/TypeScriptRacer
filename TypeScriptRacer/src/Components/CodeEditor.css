@@ -1,0 +1,456 @@
+/* ============================================================================
+   CODE EDITOR - TypeScript Racer
+   Styling for the typing game interface
+   ============================================================================ */
+
+.code-editor-container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--token-space-lg);
+  width: 100%;
+  max-width: var(--component-max-width);
+}
+
+/* ============================================================================
+   STATS PANEL
+   ============================================================================ */
+.stats-panel {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: var(--token-space-md);
+  padding: var(--token-space-md);
+  background-color: var(--token-bg-elevated);
+  border: var(--token-border-width) solid var(--token-border-default);
+  box-shadow: 0 0 15px var(--token-effect-glow),
+              2px 2px 0 var(--token-border-muted);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--token-space-xs);
+  text-align: center;
+}
+
+.stat-label {
+  font-size: var(--token-font-size-sm);
+  color: var(--token-text-secondary);
+  text-transform: uppercase;
+}
+
+.stat-value {
+  font-size: var(--token-font-size-2xl);
+  color: var(--token-brand-primary);
+  font-weight: var(--token-font-weight);
+  text-shadow: 0 0 8px var(--token-effect-glow);
+}
+
+/* ============================================================================
+   TYPING TERMINAL (Single Terminal with Overlay)
+   ============================================================================ */
+.typing-terminal {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--token-bg-elevated);
+  border: var(--token-border-width) double var(--token-border-default);
+  box-shadow: 0 0 20px var(--token-effect-glow),
+              3px 3px 0 var(--token-border-muted),
+              inset 0 0 20px var(--token-effect-shadow-medium);
+  position: relative;
+}
+
+.dark .typing-terminal {
+  box-shadow: 0 0 20px var(--token-effect-glow),
+              3px 3px 0 var(--token-border-muted),
+              inset 0 0 20px var(--primitive-shadow-black-heavy);
+}
+
+.terminal-content {
+  position: relative;
+  min-height: 250px;
+  overflow: hidden;
+}
+
+.code-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--token-space-sm) var(--token-space-md);
+  background-color: var(--token-bg-base);
+  border-bottom: var(--primitive-border-1) solid var(--token-border-default);
+}
+
+.code-header-title {
+  font-size: var(--token-font-size-base);
+  color: var(--token-brand-primary);
+  text-shadow: 0 0 5px var(--token-effect-glow);
+}
+
+.code-header-title::before {
+  content: '> ';
+  opacity: 0.7;
+  animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+  0%, 100% { opacity: 0.7; }
+  50% { opacity: 0.2; }
+}
+
+.code-header-hint {
+  font-size: var(--token-font-size-sm);
+  color: var(--token-text-muted);
+  font-style: italic;
+}
+
+.code-header-complete {
+  font-size: var(--token-font-size-base);
+  color: var(--token-status-success);
+  text-shadow: 0 0 8px var(--token-status-success);
+  animation: pulse-glow 1s ease-in-out infinite;
+}
+
+.paste-warning,
+.error-warning {
+  font-size: var(--token-font-size-base);
+  color: var(--token-status-error);
+  text-shadow: 0 0 8px var(--token-status-error);
+  animation: shake 0.5s ease-in-out, pulse-glow 1s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+  0%, 100% {
+    opacity: 1;
+    text-shadow: 0 0 8px var(--token-status-success);
+  }
+  50% {
+    opacity: 0.7;
+    text-shadow: 0 0 15px var(--token-status-success);
+  }
+}
+
+@keyframes shake {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  75% {
+    transform: translateX(5px);
+  }
+}
+
+/* ============================================================================
+   GHOST CODE OVERLAY (Dimmed target code)
+   ============================================================================ */
+.ghost-code-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: transparent;
+  pointer-events: none;
+  z-index: 10;
+  /* Prevent text selection and copying */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.ghost-code-with-lines {
+  display: flex;
+  flex-direction: column;
+  padding-left: calc(3rem + 1rem);
+}
+
+.ghost-code-line {
+  line-height: 36px;
+  height: 36px;
+  min-height: 36px;
+}
+
+.ghost-code-content {
+  font-family: var(--token-font-family);
+  font-size: 24px;
+  line-height: 36px;
+  color: var(--token-text-primary);
+  opacity: 0.45;
+  margin: 0;
+  white-space: pre;
+  padding: 0;
+}
+
+.target-code-with-lines {
+  display: flex;
+  flex-direction: column;
+}
+
+.target-code-line {
+  display: flex;
+  flex-direction: row;
+  line-height: var(--token-line-height-normal);
+}
+
+.target-line-number {
+  font-family: var(--token-font-family);
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--token-text-muted);
+  padding: 0 1rem 0 0.5rem;
+  text-align: right;
+  min-width: 3rem;
+  background-color: var(--token-bg-base);
+  border-right: 1px solid var(--token-border-muted);
+  flex-shrink: 0;
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+.target-code-content {
+  font-family: var(--token-font-family);
+  font-size: 24px;
+  line-height: 1.5;
+  color: var(--token-text-primary);
+  margin: 0;
+  white-space: pre;
+  padding-left: 1rem;
+  flex: 1;
+  /* Prevent text selection and copying */
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/* Character highlighting for ghost code */
+.char {
+  position: relative;
+}
+
+/* Chars that have been typed correctly fade out completely */
+.char-correct {
+  opacity: 0;
+}
+
+/* Chars that have errors stay visible in red */
+.char-error {
+  opacity: 1;
+  color: var(--token-status-error);
+  background-color: var(--token-status-error);
+  filter: brightness(1.5);
+}
+
+/* Current character to type - highlighted */
+.char-current {
+  opacity: 1;
+  background-color: var(--token-brand-primary);
+  color: var(--token-bg-base);
+  animation: current-char-pulse 0.8s ease-in-out infinite;
+}
+
+@keyframes current-char-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* ============================================================================
+   USER INPUT OVERLAY (CodeMirror editor on top of ghost)
+   ============================================================================ */
+.user-input-overlay {
+  position: relative;
+  z-index: 2;
+}
+
+/* Error state styling */
+.typing-terminal.has-error {
+  animation: error-shake 0.3s ease-in-out;
+}
+
+@keyframes error-shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-3px); }
+  75% { transform: translateX(3px); }
+}
+
+.code-mirror-editor {
+  font-family: var(--token-font-family) !important;
+  background-color: transparent !important;
+}
+
+/* Make CodeMirror background transparent so ghost shows through */
+.code-mirror-editor .cm-editor {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.code-mirror-editor .cm-scroller {
+  background-color: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.code-mirror-editor .cm-gutters {
+  background-color: var(--token-bg-base) !important;
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* Force all wrapper divs to have no padding */
+.code-mirror-editor > div {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+/* Override CodeMirror default styles to match theme */
+.code-mirror-editor .cm-editor {
+  outline: none !important;
+}
+
+.code-mirror-editor .cm-scroller {
+  font-family: var(--token-font-family) !important;
+  overflow-x: auto;
+}
+
+.code-mirror-editor .cm-content {
+  font-family: var(--token-font-family) !important;
+  font-size: 24px !important;
+  line-height: 36px !important;
+  padding: 0 0 0 1rem !important;
+}
+
+.code-mirror-editor .cm-gutters {
+  min-width: 3rem !important;
+  width: 3rem !important;
+  padding: 0 0.8rem 0 0.5rem !important;
+  background-color: var(--token-bg-base) !important;
+  opacity: 1 !important;
+}
+
+.code-mirror-editor .cm-lineNumbers {
+  font-family: var(--token-font-family) !important;
+  font-size: 24px !important;
+  line-height: 36px !important;
+}
+
+.code-mirror-editor .cm-gutterElement {
+  text-align: right !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  line-height: 36px !important;
+  min-height: 36px !important;
+  height: 36px !important;
+}
+
+.code-mirror-editor .cm-line {
+  line-height: 36px !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  height: 36px !important;
+}
+
+/* Remove any extra spacing from the editor wrapper */
+.code-mirror-editor .cm-editor {
+  outline: none !important;
+}
+
+.code-mirror-editor .cm-scroller {
+  padding: 0 !important;
+}
+
+.code-mirror-editor .cm-content {
+  padding-top: 0 !important;
+  margin-top: 0 !important;
+}
+
+/* ============================================================================
+   ACTION BUTTONS
+   ============================================================================ */
+.editor-actions {
+  display: flex;
+  gap: var(--token-space-md);
+  justify-content: center;
+  padding: var(--token-space-md) 0;
+}
+
+/* ============================================================================
+   RESPONSIVE DESIGN
+   ============================================================================ */
+@media (max-width: 768px) {
+  .stats-panel {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .stat-label {
+    font-size: var(--token-font-size-xs);
+  }
+
+  .stat-value {
+    font-size: var(--token-font-size-xl);
+  }
+
+  .ghost-code-content,
+  .ghost-line-number {
+    font-size: 20px;
+  }
+
+  .code-mirror-editor .cm-content {
+    font-size: 20px !important;
+  }
+
+  .code-mirror-editor .cm-lineNumbers {
+    font-size: 20px !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-panel {
+    grid-template-columns: 1fr;
+  }
+
+  .code-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--token-space-xs);
+  }
+}
+
+/* ============================================================================
+   ACCESSIBILITY
+   ============================================================================ */
+.code-editor-container:focus-within .code-header-title {
+  text-shadow: 0 0 10px var(--token-effect-glow-strong);
+}
+
+/* Ensure good contrast for character states */
+.dark .char-error {
+  color: var(--token-bg-base);
+  background-color: var(--token-status-error);
+}
+
+/* ============================================================================
+   ANIMATIONS & TRANSITIONS
+   ============================================================================ */
+.code-editor-container {
+  animation: fadeInUp 0.5s ease-out;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
