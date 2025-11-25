@@ -237,12 +237,9 @@
   opacity: 0;
 }
 
-/* Chars that have errors stay visible in red */
+/* Chars that have errors fade out like correct chars to avoid visual conflict */
 .char-error {
-  opacity: 1;
-  color: var(--token-status-error);
-  background-color: var(--token-status-error);
-  filter: brightness(1.5);
+  opacity: 0;
 }
 
 /* Current character to type - highlighted */
@@ -268,6 +265,27 @@
 .user-input-overlay {
   position: relative;
   z-index: 2;
+}
+
+/* Error character styling in CodeMirror */
+.cm-error-char {
+  background-color: #ff4444 !important;
+  color: #ffffff !important;
+  border-radius: 2px;
+  text-decoration: underline;
+  text-decoration-color: #000000;
+  text-decoration-thickness: 2px;
+  text-underline-offset: 2px;
+  font-weight: bold;
+}
+
+/* Dark mode adjustments - brighter red background with cyan text for max contrast */
+.dark .cm-error-char {
+  background-color: #ff0000 !important;
+  color: #00ffff !important;
+  text-decoration-color: #ffffff;
+  font-weight: bold;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.8);
 }
 
 /* Error state styling */

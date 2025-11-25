@@ -1,7 +1,9 @@
 import { useMemo, useState } from 'react';
 import CodeMirror from '@uiw/react-codemirror';
 import { javascript } from '@codemirror/lang-javascript';
-import { EditorView } from '@codemirror/view';
+import { EditorView, Decoration } from '@codemirror/view';
+import { StateField } from '@codemirror/state';
+import type { DecorationSet } from '@codemirror/view';
 import { useTypingGame } from '../hooks/useTypingGame';
 import type { TypingStats } from '../hooks/useTypingGame';
 import { createTerminalTheme } from '../themes/terminalTheme';
@@ -38,6 +40,32 @@ export const CodeEditor = ({
 
   // Create the terminal theme based on current theme
   const terminalTheme = useMemo(() => createTerminalTheme(isDark), [isDark]);
+
+  // Create error decoration extension
+  const errorDecoration = useMemo(() => {
+    const errorMark = Decoration.mark({
+      class: 'cm-error-char'
+    });
+
+    const errorField = StateField.define<DecorationSet>({
+      create() {
+        return Decoration.none;
+      },
+      update() {
+        // Build decorations for error positions
+        const builder: any[] = [];
+        errors.forEach(errorPos => {
+          if (errorPos < userInput.length) {
+            builder.push(errorMark.range(errorPos, errorPos + 1));
+          }
+        });
+        return Decoration.set(builder.sort((a, b) => a.from - b.from));
+      },
+      provide: f => EditorView.decorations.from(f)
+    });
+
+    return errorField;
+  }, [errors, userInput]);
 
   // Prevent paste extension for CodeMirror
   const preventPasteExtension = useMemo(() => {
@@ -205,6 +233,7 @@ export const CodeEditor = ({
                 terminalTheme,
                 EditorView.lineWrapping,
                 preventPasteExtension,
+                errorDecoration,
               ]}
               onChange={handleInputChange}
               placeholder=""
